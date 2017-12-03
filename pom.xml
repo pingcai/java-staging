@@ -145,12 +145,13 @@
 
             <!--日志-->
             <!--遗留层-->
+            <!--commons-logging遗留-->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jcl-over-slf4j</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            <!--commons-logging遗留-->
+            <!--log4j遗留-->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>log4j-over-slf4j</artifactId>
