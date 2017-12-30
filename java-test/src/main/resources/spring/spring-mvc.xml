@@ -21,7 +21,14 @@
                                 <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
                             </bean>
                         </property>
+                        <!--json只输出非空属性-->
+                        <property name="serializationInclusion" value="NON_NULL"/>
                     </bean>
+                </property>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
                 </property>
             </bean>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
