@@ -9,6 +9,7 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -117,21 +118,7 @@ public class HttpClientUtils {
             });
         }
 
-        String result = CLIENT.execute(httpGet, (response -> {
-            int status = response.getStatusLine().getStatusCode();
-            String r = null;
-            if (status >= 200 && status < 300) {
-                HttpEntity entity = response.getEntity();
-                if (Objects.nonNull(entity)) {
-                    r = EntityUtils.toString(entity);
-                }
-            } else {
-                throw new RuntimeException(String.valueOf(response.getStatusLine()));
-            }
-            return r;
-        }));
-
-        return result;
+        return execPost(httpGet);
     }
 
     private static String doPost(String url, Map<String, Object> headers, Map<String, Object> params, boolean urlParam, int timeout) throws IOException {
@@ -168,7 +155,7 @@ public class HttpClientUtils {
         return execPost(httpPost);
     }
 
-    private static String execPost(HttpPost httpPost) throws IOException {
+    private static String execPost(HttpUriRequest httpPost) throws IOException {
         return CLIENT.execute(httpPost, (response) -> {
             StatusLine statusLine = response.getStatusLine();
             String res = null;
