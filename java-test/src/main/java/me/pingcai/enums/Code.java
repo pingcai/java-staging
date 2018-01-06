@@ -5,7 +5,8 @@ package me.pingcai.enums;
  */
 public interface Code {
 
-    String getCode();
+    int getCode();
 
-    String getData();
+    String getMessage();
+
 }

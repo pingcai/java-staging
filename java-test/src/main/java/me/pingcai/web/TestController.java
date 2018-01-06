@@ -1,6 +1,7 @@
 package me.pingcai.web;
 
 import lombok.extern.slf4j.Slf4j;
+import me.pingcai.vo.ResponseFactory;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +21,8 @@ public class TestController {
 
     @RequestMapping(value = "alive",
             method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD, RequestMethod.PUT, RequestMethod.DELETE},
-            produces = MediaType.TEXT_HTML_VALUE)
-    public String alive(@RequestParam Map<String, Object> data) {
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Object alive(Map<String, Object> data) {
         log.info("Request success !");
         if (MapUtils.isNotEmpty(data)) {
             StringBuilder sb = new StringBuilder();
@@ -30,14 +31,14 @@ public class TestController {
             });
             log.info("Request params : {}", sb.subSequence(0, sb.length() - 1));
         }
-        return "yes";
+        return ResponseFactory.buildSuccess(data);
     }
 
 
     @RequestMapping(value = "json",
             method = {RequestMethod.POST, RequestMethod.HEAD, RequestMethod.PUT, RequestMethod.DELETE},
-            produces = MediaType.TEXT_HTML_VALUE)
-    public String json(@RequestBody Map<String, Object> data) {
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Object json(@RequestBody Map<String, Object> data) {
         log.info("Request success !");
         if (MapUtils.isNotEmpty(data)) {
             StringBuilder sb = new StringBuilder();
