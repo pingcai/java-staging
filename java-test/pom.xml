@@ -76,6 +76,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -146,6 +151,10 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+        </dependency>
 
     </dependencies>
 
@@ -168,6 +177,7 @@
                     <!--<scanIntervalSeconds>5</scanIntervalSeconds>-->
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>
