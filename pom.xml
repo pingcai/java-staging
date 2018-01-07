@@ -13,6 +13,7 @@
     </modules>
 
     <properties>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <java.target.version>1.8</java.target.version>
@@ -21,7 +22,8 @@
         <spring.version>4.2.8.RELEASE</spring.version>
         <mybatis.version>3.2.6</mybatis.version>
         <mybatis-spring.version>1.2.0</mybatis-spring.version>
-        <connector.java.version>5.1.36</connector.java.version>
+        <mybatis-generator.version>1.3.3</mybatis-generator.version>
+        <connector-java.version>5.1.36</connector-java.version>
 
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>2.9.1</log4j.version>
@@ -29,7 +31,10 @@
         <lombok.version>1.16.18</lombok.version>
         <guava.version>23.0</guava.version>
         <jackson.version>2.9.3</jackson.version>
-        <jetty.version>9.2.21.v20170914</jetty.version>
+        <jetty.version>9.4.7.v20170914</jetty.version>
+
+        <junit.version>4.12</junit.version>
+
     </properties>
 
     <dependencyManagement>
@@ -107,12 +112,12 @@
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
-                <version>3.2.6</version>
+                <version>${mybatis.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
-                <version>1.2.3</version>
+                <version>${mybatis-spring.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework</groupId>
@@ -121,9 +126,15 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis-generator.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${connector.java.version}</version>
+                <version>${connector-java.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -141,7 +152,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>18.0</version>
+                <version>${guava.version}</version>
             </dependency>
 
             <dependency>
@@ -229,26 +240,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.5.8</version>
-            </dependency>
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.14</version>
-            </dependency>
-
-            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-core</artifactId>
-                <version>1.3.3</version>
+                <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -300,7 +294,7 @@
                 <plugin>
                     <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
-                    <version>9.4.7.v20170914</version>
+                    <version>${jetty.version}</version>
                 </plugin>
 
             </plugins>
@@ -333,7 +327,6 @@
             <properties>
                 <!-- 预定义变量 -->
                 <env.name>dev</env.name>
-                <profiles.active>dev</profiles.active>
             </properties>
             <!-- 默认配置 -->
             <activation>
@@ -344,7 +337,6 @@
             <id>online</id>
             <properties>
                 <env.name>online</env.name>
-                <profiles.active>online</profiles.active>
             </properties>
         </profile>
     </profiles>
