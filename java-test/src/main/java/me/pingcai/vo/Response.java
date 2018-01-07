@@ -16,6 +16,9 @@ public class Response<T> implements Serializable{
 
     private T data;
 
+    /**
+     * 使用 newInstance 方法创建
+     */
     private Response(){}
 
     public static <T> Response newInstance(Code code){
@@ -59,5 +62,14 @@ public class Response<T> implements Serializable{
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                       "code=" + code +
+                       ", message='" + message + '\'' +
+                       ", data=" + data +
+                       '}';
     }
 }

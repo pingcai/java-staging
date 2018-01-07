@@ -9,4 +9,6 @@
 
     <import resource="classpath:spring/spring-dao.xml"/>
 
+    <context:component-scan base-package="me.pingcai.service"/>
+
 </beans>

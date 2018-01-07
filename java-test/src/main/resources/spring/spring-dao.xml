@@ -26,6 +26,7 @@
 
     <!-- Mapper 文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis/sqlsession-config.xml"/>
         <property name="dataSource" ref="dataSource" />
         <property name="mapperLocations" >
             <list>
@@ -34,9 +35,8 @@
         </property>
     </bean>
 
-    <!--Mapper 接口位置 -->
+    <!-- Mapper 接口位置 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="annotationClass" value="javax.annotation.Resource"></property>
         <property name="basePackage" value="me.pingcai.dao.mapper" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>

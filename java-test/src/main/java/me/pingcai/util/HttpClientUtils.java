@@ -95,7 +95,7 @@ public class HttpClientUtils {
 
         httpPost.setEntity(entity);
 
-        return execPost(httpPost);
+        return execRequest(httpPost);
     }
 
 
@@ -118,7 +118,7 @@ public class HttpClientUtils {
             });
         }
 
-        return execPost(httpGet);
+        return execRequest(httpGet);
     }
 
     private static String doPost(String url, Map<String, Object> headers, Map<String, Object> params, boolean urlParam, int timeout) throws IOException {
@@ -152,10 +152,10 @@ public class HttpClientUtils {
             });
         }
 
-        return execPost(httpPost);
+        return execRequest(httpPost);
     }
 
-    private static String execPost(HttpUriRequest httpPost) throws IOException {
+    private static String execRequest(HttpUriRequest httpPost) throws IOException {
         return CLIENT.execute(httpPost, (response) -> {
             StatusLine statusLine = response.getStatusLine();
             String res = null;
