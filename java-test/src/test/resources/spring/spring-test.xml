@@ -7,6 +7,6 @@
 
     <context:property-placeholder location="classpath:conf/${env.name}/*.properties" ignore-unresolvable="true"/>
 
-    <import resource="classpath:spring/spring-dao.xml"/>
+    <import resource="classpath:spring/spring-core.xml"/>
 
 </beans>
