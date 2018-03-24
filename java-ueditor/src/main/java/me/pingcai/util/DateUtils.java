@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -49,6 +50,14 @@ public final class DateUtils {
      */
     public static long currentTimeSecond(){
         return System.currentTimeMillis() / 1000;
+    }
+
+    /**
+     * 生成今天日期的文件路径;如 : 2018/03/24
+     * @return
+     */
+    public static String genToadyFilePath(){
+        return new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
     }
 
 

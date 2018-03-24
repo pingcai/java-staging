@@ -8,6 +8,7 @@ import me.pingcai.enums.BackCode;
 import me.pingcai.exception.ServiceException;
 import me.pingcai.service.AdminService;
 import me.pingcai.service.QiniuService;
+import me.pingcai.util.DateUtils;
 import me.pingcai.util.StringUtils;
 import me.pingcai.vo.rsp.UeditorResponse;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class AdminServiceImpl implements AdminService {
 
         UeditorResponse response;
         try {
-            String fileName = StringUtils.uuid(true);
+            String fileName = DateUtils.genToadyFilePath() + "/" + StringUtils.uuid(true);
             String suffix = null;
             if (org.apache.commons.lang3.StringUtils.isNotBlank(file.getOriginalFilename()) && file.getOriginalFilename().contains(".")) {
                 suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
