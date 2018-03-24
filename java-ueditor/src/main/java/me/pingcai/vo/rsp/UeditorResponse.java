@@ -5,34 +5,39 @@ public class UeditorResponse {
     public static final String SUCCESS = "SUCCESS";
     public static final String ERROR = "ERROR";
 
-    private String status;
-    private String url;
-    private String size;
+    private String state;
+    private String title;
     private String original;
     private String type;
+    private String url;
+    private String size;
 
     private UeditorResponse(){}
 
     public static UeditorResponse getInstance(boolean isSuccess){
         UeditorResponse u = new UeditorResponse();
         if(isSuccess){
-            u.setStatus(SUCCESS);
+            u.setState(SUCCESS);
         }else {
-            u.setStatus(ERROR);
+            u.setState(ERROR);
         }
         return u;
     }
 
-    /**
-     * 私有
-     * @param status
-     */
-    private void setStatus(String status) {
-        this.status = status;
+    public String getState() {
+        return state;
     }
 
-    public String getStatus() {
-        return status;
+    private void setState(String state) {
+        this.state = state;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUrl() {

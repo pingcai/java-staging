@@ -45,14 +45,17 @@ public class AdminServiceImpl implements AdminService {
         UeditorResponse response;
         try {
             String fileName = StringUtils.uuid(true);
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(file.getOriginalFilename())) {
-                fileName += file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+            String suffix = null;
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(file.getOriginalFilename()) && file.getOriginalFilename().contains(".")) {
+                suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+                fileName += suffix;
             }
             DefaultPutRet ret = qiniuService.put(file.getInputStream(), fileName, null, file.getContentType());
 
             response = UeditorResponse.getInstance(true);
-            response.setUrl(qiniuService.genUrl(ret.key));
-            response.setType(file.getContentType());
+            response.setTitle(ret.key);
+            response.setUrl(ret.key);
+            response.setType(suffix);
             response.setSize(String.valueOf(file.getSize()));
             response.setOriginal(file.getOriginalFilename());
 

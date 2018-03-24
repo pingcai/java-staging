@@ -23,12 +23,21 @@ public class AdminController {
         return "index";
     }
 
+    @RequestMapping(value = "/upload/image", method = RequestMethod.GET)
+    public Object getConfig(String action) {
+        if("config".equals(action)){
+            return "forward:/static/ueditor/jsp/config.json";
+        }
+        return "index";
+    }
 
     @RequestMapping(value = "/upload/image", method = RequestMethod.POST)
     @ResponseBody
-    public Object uploadImage(@RequestParam("image") MultipartFile uploadFile) {
+    public Object uploadImage(@RequestParam("upfile") MultipartFile uploadFile) {
         return JsonUtils.object2Json(adminService.uploadImage(uploadFile));
     }
+
+
 
 
 }
