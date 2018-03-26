@@ -126,12 +126,6 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-core</artifactId>
-                <version>${mybatis-generator.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${connector-java.version}</version>
@@ -254,6 +248,11 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-maven-plugin</artifactId>
+                    <version>${mybatis-generator.version}</version>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.1</version>
@@ -315,6 +314,13 @@
                     <include>**/*.xml</include>
                 </includes>
                 <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>false</filtering>
             </resource>
         </resources>
 

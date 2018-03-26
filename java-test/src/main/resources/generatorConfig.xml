@@ -78,7 +78,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="test">
+        <table tableName="case">
             <!-- optional   , only for mybatis3 runtime
                  自动生成的键值（identity,或者序列值）
                如果指定此元素，MBG将会生成<selectKey>元素，然后将此元素插入到SQL Map的<insert> 元素之中
@@ -99,6 +99,7 @@
 
             <generatedKey column="course_id" sqlStatement="MySql" identity="" type=""/>
             -->
+            <generatedKey column="id" sqlStatement="MySql" identity="" type=""/>
             <!-- optional.
                     列的命名规则：
                     MBG使用 <columnRenamingRule> 元素在计算列名的对应 名称之前，先对列名进行重命名，

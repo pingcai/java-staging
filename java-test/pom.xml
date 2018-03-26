@@ -163,10 +163,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis.generator</groupId>
-            <artifactId>mybatis-generator-core</artifactId>
-        </dependency>
 
     </dependencies>
 
@@ -175,6 +171,17 @@
         <finalName>java-test</finalName>
 
         <plugins>
+
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <configuration>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                </configuration>
+            </plugin>
+
+            <!--整合jrebel-->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -185,8 +192,8 @@
                     <webApp>
                         <contextPath>/</contextPath>
                     </webApp>
-                    <!--自动更新，支持不是很好，先关闭-->
-                    <!--<scanIntervalSeconds>5</scanIntervalSeconds>-->
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <webAppConfig>src/main/resources/webdefault.xml</webAppConfig>
                 </configuration>
             </plugin>
 
