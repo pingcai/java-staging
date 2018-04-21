@@ -2,11 +2,14 @@ package me.pingcai.web;
 
 import lombok.extern.slf4j.Slf4j;
 import me.pingcai.vo.ResponseFactory;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -32,4 +35,13 @@ public class TestController {
         return ResponseFactory.buildSuccess(data);
     }
 
+
+    @RequestMapping(value = "test",
+            method = {RequestMethod.POST},
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Object test(@RequestParam(value = "file") MultipartFile[] files, Long data) {
+        log.info("Request Params : " + CollectionUtils.size(files));
+        return ResponseFactory.buildSuccess(data);
+    }
 }
