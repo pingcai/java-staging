@@ -8,31 +8,33 @@ import me.pingcai.enums.Code;
  */
 public final class ResponseFactory {
 
-    public static <T> Response build(Code code){
-        Response resp = Response.newInstance(code);
-        return resp;
+    public static <T> Response build() {
+        return Response.newInstance();
     }
 
-    public static <T> Response build(Code code,T t){
-        Response resp = Response.newInstance(code,t);
-        return resp;
+    public static <T> Response build(Code code) {
+        return Response.newInstance(code);
     }
 
-    public static <T> Response buildSuccess(T t){
-        Response resp = Response.newInstance(BackCode.SUCCESS,t);
-        return resp;
+    public static <T> Response build(Code code, T t) {
+        return Response.newInstance(code, t);
     }
 
-    public static <T> Response buildError(){
-        Response resp = Response.newInstance(BackCode.ERROR);
-        return resp;
+    public static <T> Response buildSuccess() {
+        return Response.newInstance(BackCode.SUCCESS);
     }
 
-    public static <T> Response buildError(T t){
-        Response resp = Response.newInstance(BackCode.ERROR,t);
-        return resp;
+    public static <T> Response buildSuccess(T t) {
+        return Response.newInstance(BackCode.SUCCESS, t);
     }
 
+    public static <T> Response buildError() {
+        return Response.newInstance(BackCode.ERROR);
+    }
+
+    public static <T> Response buildError(T t) {
+        return Response.newInstance(BackCode.ERROR, t);
+    }
 
 
 }

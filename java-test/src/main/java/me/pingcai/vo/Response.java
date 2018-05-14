@@ -21,6 +21,11 @@ public class Response<T> implements Serializable{
      */
     private Response(){}
 
+    public static <T> Response newInstance(){
+        Response response = new Response<T>();
+        return response;
+    }
+
     public static <T> Response newInstance(Code code){
         Response response = new Response<T>();
         response.setCode(code.getCode());
