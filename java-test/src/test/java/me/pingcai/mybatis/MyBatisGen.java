@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * MyBatis 实体生成
+ * MyBatis 实体生成,，第一次生成需要修改generatorConfig.xml的生成路径
  * Created by pingcai at 2018/5/15 14:58
  */
 public class MyBatisGen {
