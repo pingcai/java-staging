@@ -36,7 +36,7 @@ public class TestController {
     }
 
 
-    @RequestMapping(value = "test",
+    @RequestMapping(value = "user/test",
             method = {RequestMethod.POST},
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
