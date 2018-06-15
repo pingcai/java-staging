@@ -6,7 +6,8 @@ package me.pingcai.enums;
 public enum BackCode implements Code{
 
     ERROR(0,"系统异常"),
-    SUCCESS(1,"操作成功");
+    SUCCESS(1,"操作成功"),
+    LOGIN_FAIL(2,"登录失败");
 
     private int code;
     private String message;

@@ -1,18 +1,23 @@
 package me.pingcai.service.impl;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import me.pingcai.dao.entity.User;
+import me.pingcai.dao.mapper.UserMapper;
+import me.pingcai.service.UserService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
- * Created by pingcai at 2018/6/1 17:46
+ * Created by pingcai at 2018/6/13 13:55
  */
 @Service
-public class UserServiceImpl implements UserDetailsService {
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
+public class UserServiceImpl implements UserService {
 
+    @Resource
+    UserMapper userMapper;
+
+    @Override
+    public User selectByNickName(String account) {
+        return userMapper.selectByNickName(account);
+    }
 }
