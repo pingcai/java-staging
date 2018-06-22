@@ -25,8 +25,12 @@ create table test(id bigint primary key auto_increment,name varchar(32),age tiny
 测试
 
 ```    
-mvn jetty:run
+mvn spring-boot:run
 
 curl -X GET http://127.0.0.1:7878/alive
 
 ```
+
+SpringBoot 打包
+
+    mvn clean package
