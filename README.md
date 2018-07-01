@@ -1,36 +1,20 @@
 ### 说明
 
-SSM 开发脚手架，集成常见的组件
+- AvroTests 测试Avro序列化和反序列化
 
-### 使用
+- KafkaTests 测试通过Avro完成生产者消费者问题
 
-扒代码
+### 生成Avro实体
 
-    git clone git@github.com:pingcai/java-staging.git
-    
-    cd java-staging
+    java -jar D:/java/apache-maven-3.5.3/store/org/apache/avro/avro-tools/1.8.2/avro-tools-1.8.2.jar compile schema user.avsc .
 
-修改配置
+或
 
-    java-test/src/main/resources/conf/dev/config.properties
+    mvn
 
-测试数据库
+### 问题
 
-```
-mysql -e 'create database java_staging default charset utf8mb4;use java_staging; \
-create table test(id bigint primary key auto_increment,name varchar(32),age tinyint);' -h localhost -uroot -p
-```
+#### 找不到 DESKTOP-SGV689U.localdomain 主机
 
+修改运行程序的机器的**host**
 
-测试
-
-```    
-mvn spring-boot:run
-
-curl -X GET http://127.0.0.1:7878/alive
-
-```
-
-SpringBoot 打包
-
-    mvn clean package
