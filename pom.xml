@@ -6,7 +6,8 @@
 
     <groupId>me.pingcai</groupId>
     <artifactId>java-staging</artifactId>
-    <packaging>jar</packaging>
+    <!--要想通过SpringBoot打包，必须设置为POM-->
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
