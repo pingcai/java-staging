@@ -1,6 +1,5 @@
 package me.pingcai.kafka.deserializer;
 
-import com.sun.xml.internal.ws.encoding.soap.DeserializationException;
 import me.pingcai.kafka.KafkaTopicEnum;
 import org.apache.avro.io.BinaryDecoder;
 import org.apache.avro.io.DatumReader;
@@ -29,7 +28,7 @@ public class UserDeserializer<T extends SpecificRecordBase> implements Deseriali
         try {
             return userDatumReader.read(null, binaryEncoder);
         } catch (IOException e) {
-            throw new DeserializationException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
