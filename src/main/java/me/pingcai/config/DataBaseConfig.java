@@ -1,6 +1,9 @@
 package me.pingcai.config;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -14,11 +17,14 @@ import javax.sql.DataSource;
 @Configuration
 public class DataBaseConfig {
 
-    @Resource
-    private DataSource dataSource;
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource dataSource() {
+        return DataSourceBuilder.create().build();
+    }
 
     @Bean
-    public DataSourceTransactionManager dataSourceTransactionManager() {
+    public DataSourceTransactionManager dataSourceTransactionManager(@Autowired DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
