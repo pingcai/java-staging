@@ -1,7 +1,9 @@
 package me.pingcai.web;
 
 import lombok.extern.slf4j.Slf4j;
+import me.pingcai.enums.UserType;
 import me.pingcai.vo.ResponseFactory;
+import me.pingcai.vo.req.UserVo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.http.MediaType;
@@ -37,11 +39,9 @@ public class TestController {
 
 
     @RequestMapping(value = "test",
-            method = {RequestMethod.POST},
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Object test(@RequestParam(value = "file") MultipartFile[] files, Long data) {
-        log.info("Request Params : " + CollectionUtils.size(files));
-        return ResponseFactory.buildSuccess(data);
+            method = {RequestMethod.POST})
+    public Object test(UserVo userVo) {
+        log.info("UserType : " + userVo.getUserType());
+        return ResponseFactory.buildSuccess(userVo);
     }
 }

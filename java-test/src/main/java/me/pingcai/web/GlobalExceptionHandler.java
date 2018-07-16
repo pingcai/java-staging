@@ -1,6 +1,7 @@
 package me.pingcai.web;
 
 import lombok.extern.slf4j.Slf4j;
+import me.pingcai.exception.CustomException;
 import me.pingcai.vo.ResponseFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,5 +21,10 @@ public class GlobalExceptionHandler {
         return ResponseFactory.buildError();
     }
 
+    @ExceptionHandler(value = CustomException.class)
+    public Object customException(CustomException e) {
+        log.error("customException : ", e);
+        return ResponseFactory.buildError(e.getCode());
+    }
 
 }

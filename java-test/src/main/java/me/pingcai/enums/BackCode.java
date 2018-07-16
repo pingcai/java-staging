@@ -6,7 +6,8 @@ package me.pingcai.enums;
 public enum BackCode implements Code{
 
     ERROR(0,"系统异常"),
-    SUCCESS(1,"操作成功");
+    SUCCESS(1,"操作成功"),
+    DATETIME_FORMAT_ERROR(5,"日期格式有误");
 
     private int code;
     private String message;
