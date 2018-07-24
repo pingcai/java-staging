@@ -17,7 +17,7 @@ public class MyBatisGen {
 
     public static void main(String[] args) throws Exception {
 
-        String configPath = "C:\\Users\\pingcai\\IdeaProjects\\java-staging\\java-test\\src\\test\\resources\\generatorConfig.xml";
+        String configPath = "/Users/huangpingcai/IdeaProjects/java-staging/java-test/src/test/resources/generatorConfig.xml";
 
         List<String> warnings = new ArrayList<>();
         boolean overwrite = true;
