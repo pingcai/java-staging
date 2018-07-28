@@ -7,8 +7,9 @@
 
     <context:property-placeholder location="classpath:conf/${env.name}/*.properties" ignore-unresolvable="true"/>
 
-    <!--<import resource="classpath:spring/spring-dao.xml"/>-->
+    <import resource="classpath:spring/spring-dao.xml"/>
 
     <context:component-scan base-package="me.pingcai.service"/>
+    <context:component-scan base-package="me.pingcai.reposiroty"/>
 
 </beans>

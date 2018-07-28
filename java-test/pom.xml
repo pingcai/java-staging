@@ -167,10 +167,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis.generator</groupId>
-            <artifactId>mybatis-generator-core</artifactId>
-        </dependency>
 
     </dependencies>
 
@@ -189,7 +185,6 @@
                 </configuration>
             </plugin>
 
-            <!--整合jrebel-->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -201,7 +196,6 @@
                         <contextPath>/</contextPath>
                     </webApp>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
-                    <webAppConfig>src/main/resources/webdefault.xml</webAppConfig>
                 </configuration>
             </plugin>
 

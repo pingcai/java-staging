@@ -1,7 +1,7 @@
 package me.pingcai.vo;
 
-import me.pingcai.enums.BackCode;
-import me.pingcai.enums.Code;
+
+import me.pingcai.enums.HttpError;
 
 /**
  * create by 黄平财 at 2018/1/6 00:49
@@ -12,29 +12,20 @@ public final class ResponseFactory {
         return Response.newInstance();
     }
 
-    public static <T> Response build(Code code) {
-        return Response.newInstance(code);
+    public static <T> Response build(HttpError error) {
+        return Response.newInstance(error);
     }
 
-    public static <T> Response build(Code code, T t) {
-        return Response.newInstance(code, t);
+    public static <T> Response build(HttpError error, T t) {
+        return Response.newInstance(error, t);
     }
 
     public static <T> Response buildSuccess() {
-        return Response.newInstance(BackCode.SUCCESS);
+        return Response.newInstance(HttpError.SUCCESS);
     }
 
     public static <T> Response buildSuccess(T t) {
-        return Response.newInstance(BackCode.SUCCESS, t);
+        return Response.newInstance(HttpError.SUCCESS, t);
     }
-
-    public static <T> Response buildError() {
-        return Response.newInstance(BackCode.ERROR);
-    }
-
-    public static <T> Response buildError(T t) {
-        return Response.newInstance(BackCode.ERROR, t);
-    }
-
 
 }

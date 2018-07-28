@@ -1,6 +1,8 @@
-package me.pingcai.web;
+package me.pingcai.web.handler;
 
 import lombok.extern.slf4j.Slf4j;
+import me.pingcai.enums.HttpError;
+import me.pingcai.exception.ApiException;
 import me.pingcai.vo.ResponseFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,8 +19,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Throwable.class)
     public Object throwable(Throwable throwable) {
         log.error("internal exception : ", throwable);
-        return ResponseFactory.buildError();
+        return ResponseFactory.build(HttpError.ERROR);
     }
 
+    @ExceptionHandler(value = ApiException.class)
+    public Object throwable(ApiException e) {
+        return ResponseFactory.build(e.getError());
+    }
 
 }

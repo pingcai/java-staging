@@ -1,6 +1,6 @@
 package me.pingcai.vo;
 
-import me.pingcai.enums.Code;
+import me.pingcai.enums.HttpError;
 
 import java.io.Serializable;
 
@@ -26,10 +26,10 @@ public class Response<T> implements Serializable{
         return response;
     }
 
-    public static <T> Response newInstance(Code code){
+    public static <T> Response newInstance(HttpError httpError){
         Response response = new Response<T>();
-        response.setCode(code.getCode());
-        response.setMessage(code.getMessage());
+        response.setCode(httpError.getCode());
+        response.setMessage(httpError.getMessage());
         return response;
     }
 
@@ -39,8 +39,8 @@ public class Response<T> implements Serializable{
         return response;
     }
 
-    public static <T> Response newInstance(Code code,T t){
-        Response response = newInstance(code);
+    public static <T> Response newInstance(HttpError httpError, T t){
+        Response response = newInstance(httpError);
         response.setData(t);
         return response;
     }
