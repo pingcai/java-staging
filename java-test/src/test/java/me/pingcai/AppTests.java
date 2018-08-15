@@ -3,13 +3,11 @@ package me.pingcai;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.collect.Maps;
 import lombok.Data;
 import me.pingcai.util.JsonUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import org.omg.CORBA.MARSHAL;
-import org.omg.CORBA.OBJ_ADAPTER;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -17,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * create by 黄平财 at 2017/11/30 23:23
@@ -66,5 +65,18 @@ public class AppTests {
         });
 
         System.out.println(test2);
+    }
+
+    @Test
+    public void testOptional() {
+        String test = "abc";
+        Optional<String> optional = Optional.ofNullable(test);
+
+        optional = optional.filter(str -> StringUtils.isNotEmpty(str));
+
+        System.out.println(optional.orElse("orElseGet"));
+
+        optional.ifPresent(str -> System.out.print(str));
+
     }
 }
