@@ -2,7 +2,11 @@ package me.pingcai;
 
 import com.google.common.collect.Lists;
 import me.pingcai.service.TestService;
+import me.pingcai.util.JsonUtils;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +21,18 @@ import static org.mockito.Mockito.*;
  * @since 2018/8/15 18:14
  */
 public class MockitoTests {
+
+    @Mock
+    private me.pingcai.dao.entity.Test mockTest;
+
+    @Before
+    public void before(){
+        MockitoAnnotations.initMocks(this);
+
+        when(mockTest.getName()).thenReturn("mock");
+        doReturn(110L).when(mockTest).getId();
+        when(mockTest.getAge()).thenReturn((byte) 9);
+    }
 
     @Test
     public void testMock() {
@@ -123,5 +139,17 @@ public class MockitoTests {
 
     }
 
+    @Test
+    public void test() {
+
+        TestService testService = mock(TestService.class);
+
+        when(testService.getById(eq(2L))).thenReturn(mockTest);
+
+        System.out.println(testService.getById(2L).getName());
+        // 会去序列化代理类,而代理类
+        System.out.println(JsonUtils.object2Json(testService.getById(2L)));
+        System.out.println(JsonUtils.object2Json(testService.getById(3L)));
+    }
 
 }
