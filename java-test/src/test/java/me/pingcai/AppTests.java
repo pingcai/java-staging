@@ -6,8 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import lombok.Data;
 import me.pingcai.util.JsonUtils;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -28,6 +31,27 @@ public class AppTests {
     public static final String DATE_PATTERN = "yyyy-MM-dd";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
+    @Test
+    public void testXJson() throws IOException {
+        XContentBuilder xContentBuilder = XContentFactory.jsonBuilder()
+                .startObject()
+                .startObject("properties")
+                .startObject("name")
+                .field("type").value("text")
+                .startObject("fields")
+                .startObject("keyword")
+                .field("ignore_above").value(256)
+                .field("type").value("keyword")
+                .endObject()
+                .endObject()
+                .endObject()
+                .endObject()
+                .endObject();
+
+        xContentBuilder.humanReadable(true);
+
+        System.out.println(xContentBuilder.string());
+    }
 
     @Test
     public void test() {
