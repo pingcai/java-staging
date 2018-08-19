@@ -341,6 +341,7 @@
             <properties>
                 <!-- 预定义变量 -->
                 <env.name>dev</env.name>
+                <env.log4j.console>&lt;appender-ref ref=&quot;console&quot;/&gt;</env.log4j.console>
             </properties>
             <!-- 默认配置 -->
             <activation>
