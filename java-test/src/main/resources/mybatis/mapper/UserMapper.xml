@@ -3,13 +3,13 @@
 <mapper namespace="me.pingcai.dao.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="me.pingcai.dao.entity.User">
     <constructor>
-      <idArg column="ID" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="STATUS" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="SEX" javaType="java.lang.Boolean" jdbcType="BIT" />
-      <arg column="AGE" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="BIRTHDAY" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="COMMENT" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sex" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="age" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="birthday" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, STATUS, NAME, SEX, AGE, BIRTHDAY, COMMENT
+    id, status, name, sex, age, birthday, comment
   </sql>
   <select id="selectByExample" parameterType="me.pingcai.dao.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from USER
+    from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,50 +90,50 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from USER
-    where ID = #{id,jdbcType=BIGINT}
+    from user
+    where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from USER
-    where ID = #{id,jdbcType=BIGINT}
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="me.pingcai.dao.entity.UserExample">
-    delete from USER
+    delete from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="me.pingcai.dao.entity.User">
-    insert into USER (ID, STATUS, NAME, 
-      SEX, AGE, BIRTHDAY, COMMENT
+    insert into user (id, status, name, 
+      sex, age, birthday, comment
       )
     values (#{id,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, 
       #{sex,jdbcType=BIT}, #{age,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="me.pingcai.dao.entity.User">
-    insert into USER
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        ID,
+        id,
       </if>
       <if test="status != null">
-        STATUS,
+        status,
       </if>
       <if test="name != null">
-        NAME,
+        name,
       </if>
       <if test="sex != null">
-        SEX,
+        sex,
       </if>
       <if test="age != null">
-        AGE,
+        age,
       </if>
       <if test="birthday != null">
-        BIRTHDAY,
+        birthday,
       </if>
       <if test="comment != null">
-        COMMENT,
+        comment,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -161,34 +161,34 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="me.pingcai.dao.entity.UserExample" resultType="java.lang.Long">
-    select count(*) from USER
+    select count(*) from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update USER
+    update user
     <set>
       <if test="record.id != null">
-        ID = #{record.id,jdbcType=BIGINT},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.status != null">
-        STATUS = #{record.status,jdbcType=TINYINT},
+        status = #{record.status,jdbcType=TINYINT},
       </if>
       <if test="record.name != null">
-        NAME = #{record.name,jdbcType=VARCHAR},
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.sex != null">
-        SEX = #{record.sex,jdbcType=BIT},
+        sex = #{record.sex,jdbcType=BIT},
       </if>
       <if test="record.age != null">
-        AGE = #{record.age,jdbcType=TINYINT},
+        age = #{record.age,jdbcType=TINYINT},
       </if>
       <if test="record.birthday != null">
-        BIRTHDAY = #{record.birthday,jdbcType=TIMESTAMP},
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="record.comment != null">
-        COMMENT = #{record.comment,jdbcType=VARCHAR},
+        comment = #{record.comment,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -196,50 +196,50 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update USER
-    set ID = #{record.id,jdbcType=BIGINT},
-      STATUS = #{record.status,jdbcType=TINYINT},
-      NAME = #{record.name,jdbcType=VARCHAR},
-      SEX = #{record.sex,jdbcType=BIT},
-      AGE = #{record.age,jdbcType=TINYINT},
-      BIRTHDAY = #{record.birthday,jdbcType=TIMESTAMP},
-      COMMENT = #{record.comment,jdbcType=VARCHAR}
+    update user
+    set id = #{record.id,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=TINYINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=BIT},
+      age = #{record.age,jdbcType=TINYINT},
+      birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      comment = #{record.comment,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="me.pingcai.dao.entity.User">
-    update USER
+    update user
     <set>
       <if test="status != null">
-        STATUS = #{status,jdbcType=TINYINT},
+        status = #{status,jdbcType=TINYINT},
       </if>
       <if test="name != null">
-        NAME = #{name,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        SEX = #{sex,jdbcType=BIT},
+        sex = #{sex,jdbcType=BIT},
       </if>
       <if test="age != null">
-        AGE = #{age,jdbcType=TINYINT},
+        age = #{age,jdbcType=TINYINT},
       </if>
       <if test="birthday != null">
-        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+        birthday = #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="comment != null">
-        COMMENT = #{comment,jdbcType=VARCHAR},
+        comment = #{comment,jdbcType=VARCHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="me.pingcai.dao.entity.User">
-    update USER
-    set STATUS = #{status,jdbcType=TINYINT},
-      NAME = #{name,jdbcType=VARCHAR},
-      SEX = #{sex,jdbcType=BIT},
-      AGE = #{age,jdbcType=TINYINT},
-      BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
-      COMMENT = #{comment,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=BIGINT}
+    update user
+    set status = #{status,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
+      age = #{age,jdbcType=TINYINT},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
