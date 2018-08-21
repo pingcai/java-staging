@@ -54,9 +54,9 @@ import java.util.stream.Stream;
 @Slf4j
 public class ElasticsearchTests {
 
-    public static final String INDEX = "test_index";
+    public static final String INDEX = "test_user_index";
 
-    public static final String CUSTOM_TYPE = "custom_type";
+    public static final String CUSTOM_TYPE = "test_user_type";
 
     Client client;
 
@@ -69,6 +69,13 @@ public class ElasticsearchTests {
     @After
     public void after() {
         client.close();
+    }
+
+    @Test
+    public void testCreateAll() throws IOException {
+        testCreateIndex();
+        testAddMapping();
+        testAddChineseDocument();
     }
 
     @Test

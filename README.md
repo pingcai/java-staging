@@ -39,3 +39,13 @@ curl -X GET http://127.0.0.1:7878/alive
 IDEA 右侧 Maven 插件
 
 ```
+
+
+## 版本问题
+
+版本不对应会报: java.lang.AbstractMethodError
+
+- spring 5.0.8
+- spring-data-elasticsearch 3.0.9
+- elasticsearch 5.6.9
+
