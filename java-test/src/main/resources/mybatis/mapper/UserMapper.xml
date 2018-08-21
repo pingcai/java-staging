@@ -6,7 +6,7 @@
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="sex" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="sex" javaType="java.lang.Byte" jdbcType="TINYINT" />
       <arg column="age" javaType="java.lang.Byte" jdbcType="TINYINT" />
       <arg column="birthday" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -105,11 +105,11 @@
   </delete>
   <insert id="insert" parameterType="me.pingcai.dao.entity.User">
     insert into user (id, status, name, 
-      sex, age, birthday, comment
-      )
+      sex, age, birthday, 
+      comment)
     values (#{id,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=BIT}, #{age,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}
-      )
+      #{sex,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{comment,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="me.pingcai.dao.entity.User">
     insert into user
@@ -147,7 +147,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        #{sex,jdbcType=BIT},
+        #{sex,jdbcType=TINYINT},
       </if>
       <if test="age != null">
         #{age,jdbcType=TINYINT},
@@ -179,7 +179,7 @@
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=BIT},
+        sex = #{record.sex,jdbcType=TINYINT},
       </if>
       <if test="record.age != null">
         age = #{record.age,jdbcType=TINYINT},
@@ -200,7 +200,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       status = #{record.status,jdbcType=TINYINT},
       name = #{record.name,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=BIT},
+      sex = #{record.sex,jdbcType=TINYINT},
       age = #{record.age,jdbcType=TINYINT},
       birthday = #{record.birthday,jdbcType=TIMESTAMP},
       comment = #{record.comment,jdbcType=VARCHAR}
@@ -218,7 +218,7 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        sex = #{sex,jdbcType=BIT},
+        sex = #{sex,jdbcType=TINYINT},
       </if>
       <if test="age != null">
         age = #{age,jdbcType=TINYINT},
@@ -236,7 +236,7 @@
     update user
     set status = #{status,jdbcType=TINYINT},
       name = #{name,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=BIT},
+      sex = #{sex,jdbcType=TINYINT},
       age = #{age,jdbcType=TINYINT},
       birthday = #{birthday,jdbcType=TIMESTAMP},
       comment = #{comment,jdbcType=VARCHAR}

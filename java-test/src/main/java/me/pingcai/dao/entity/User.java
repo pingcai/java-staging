@@ -9,7 +9,7 @@ public class User {
 
     private String name;
 
-    private Boolean sex;
+    private Byte sex;
 
     private Byte age;
 
@@ -17,7 +17,7 @@ public class User {
 
     private String comment;
 
-    public User(Long id, Byte status, String name, Boolean sex, Byte age, Date birthday, String comment) {
+    public User(Long id, Byte status, String name, Byte sex, Byte age, Date birthday, String comment) {
         this.id = id;
         this.status = status;
         this.name = name;
@@ -55,11 +55,11 @@ public class User {
         this.name = name;
     }
 
-    public Boolean getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 
