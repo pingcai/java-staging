@@ -1,10 +1,14 @@
 ### 说明
 
-SSM 开发脚手架，集成常见的组件
+JAVA WEB 开发脚手架，集成常见的组件
+
+- Spring
+- Mybatis
+- Slf4j + Log4j2
 
 ### 使用
 
-扒代码
+拉取代码
 
     git clone git@github.com:pingcai/java-staging.git
     
@@ -29,5 +33,9 @@ CREATE TABLE user(id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,status TINYINT N
 mvn jetty:run
 
 curl -X GET http://127.0.0.1:7878/alive
+
+或
+
+IDEA 右侧 Maven 插件
 
 ```
