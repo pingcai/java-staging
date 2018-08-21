@@ -58,7 +58,7 @@
     <loggers>
         <root level="info">
             <!--线上不能使用console,使用maven根据环境注入-->
-            ${env.log4j.console}
+            ${log4j2.console}
             <appender-ref ref="info"/>
             <appender-ref ref="error"/>
         </root>

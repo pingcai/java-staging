@@ -17,8 +17,9 @@ SSM 开发脚手架，集成常见的组件
 测试数据库
 
 ```
-mysql -e 'create database java_staging default charset utf8mb4;use java_staging; \
-create table test(id bigint primary key auto_increment,name varchar(32),age tinyint);' -h localhost -uroot -p
+mysql -e 'CREATE DATABASE java_staging DEFAULT CHARSET utf8mb4;USE java_staging; \
+CREATE TABLE user(id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,status TINYINT NOT NULL,name VARCHAR(32) NOT NULL,sex BIT NOT NULL,age TINYINT NOT NULL,birthday DATETIME NOT NULL DEFAULT NOW(), comment VARCHAR(255) DEFAULT '')
+' -h localhost -uroot -p
 ```
 
 
