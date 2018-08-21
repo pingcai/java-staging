@@ -12,26 +12,28 @@ import java.util.Date;
 public class User {
 
     @Id
+    @Field(type = FieldType.Long)
     private Long id;
 
     @Field(type = FieldType.Integer)
     private Byte status;
 
-    @Field(type = FieldType.Text , analyzer = "ik_smart")
+    @Field(type = FieldType.Keyword )
     private String name;
 
-    @Field(type = FieldType.Boolean)
-    private Boolean sex;
+    @Field(type = FieldType.Integer)
+    private Byte sex;
 
+    @Field(type = FieldType.Integer)
     private Byte age;
 
     @Field(type = FieldType.Date)
     private Date birthday;
 
-    @Field(type = FieldType.Text)
+    @Field(type = FieldType.Text, analyzer = "ik_smart")
     private String comment;
 
-    public User(Long id, Byte status, String name, Boolean sex, Byte age, Date birthday, String comment) {
+    public User(Long id, Byte status, String name, Byte sex, Byte age, Date birthday, String comment) {
         this.id = id;
         this.status = status;
         this.name = name;
@@ -69,11 +71,11 @@ public class User {
         this.name = name;
     }
 
-    public Boolean getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 
