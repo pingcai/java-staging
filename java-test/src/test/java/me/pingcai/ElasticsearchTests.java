@@ -2,6 +2,7 @@ package me.pingcai;
 
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import me.pingcai.dao.entity.User;
 import me.pingcai.util.JsonUtils;
 import org.elasticsearch.action.DocWriteRequest;
 import org.elasticsearch.action.DocWriteResponse;
@@ -167,7 +168,7 @@ public class ElasticsearchTests {
     @Test
     public void testUpdateDocument() {
 
-        me.pingcai.dao.entity.Test tt = new me.pingcai.dao.entity.Test();
+        User tt = new User();
         tt.setName("updated");
         tt.setId(1L);
         tt.setAge((byte) 1);

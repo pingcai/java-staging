@@ -12,6 +12,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -139,8 +142,13 @@ public class AppTests {
         System.out.println(Instant.ofEpochSecond(birthday.atTime(12, 12).toEpochSecond(ZoneOffset.of("+8"))));
 
         System.out.println(Instant.ofEpochMilli(1).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    }
 
-
+    public void testDatetime2Timestamp() {
+        System.out.println(System.currentTimeMillis());
+        LocalDate date = LocalDate.parse("2017-11-27", FORMATTER);
+        LocalDateTime dateTime = date.atStartOfDay();
+        System.out.println(dateTime.toInstant(ZoneOffset.of("+8")).toEpochMilli());
     }
 
     @Test

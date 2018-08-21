@@ -1,9 +1,8 @@
 package me.pingcai.web;
 
 import lombok.extern.slf4j.Slf4j;
-import me.pingcai.dao.entity.Test;
-import me.pingcai.enums.HttpError;
-import me.pingcai.service.TestService;
+import me.pingcai.dao.entity.User;
+import me.pingcai.service.UserService;
 import me.pingcai.vo.ResponseFactory;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -16,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * create by 黄平财 at 2017/11/30 22:52
@@ -26,7 +24,7 @@ import java.util.Objects;
 public class TestController {
 
     @Resource
-    private TestService testService;
+    private UserService userService;
 
     @RequestMapping(value = "alive",
             method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD, RequestMethod.PUT, RequestMethod.DELETE},
@@ -44,9 +42,9 @@ public class TestController {
     }
 
     @RequestMapping(value = "test")
-    public Object insert(Test test){
-        Test res = testService.insertIfNotExist(test);
-        return ResponseFactory.buildSuccess(test);
+    public Object insert(User test){
+        User res = userService.insertIfNotExist(test);
+        return ResponseFactory.buildSuccess(res);
     }
 
     @RequestMapping(value = "test",
