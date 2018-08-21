@@ -55,7 +55,6 @@ import java.util.stream.Stream;
 public class ElasticsearchTests {
 
     public static final String INDEX = "test_index";
-    public static final String TYPE = "test_type";
 
     public static final String CUSTOM_TYPE = "custom_type";
 
@@ -148,9 +147,9 @@ public class ElasticsearchTests {
         String[] keys = KEY.split("[\\t\\n]+");
         Random random = new Random();
 
-        int count = 1000;
+        int count = 100;
         Map<String, Object> data;
-        for (int i = 900; i < count; i++) {
+        for (int i = 1; i < count; i++) {
             data = Maps.newHashMap();
             data.put("id", i);
             data.put("key", "" + keys[random.nextInt(keys.length)]);
@@ -158,6 +157,7 @@ public class ElasticsearchTests {
             data.put("birthday", LocalDateTime.now());
             data.put("comment",comments[random.nextInt(comments.length)]);
             IndexResponse indexResponse = client.prepareIndex(INDEX, CUSTOM_TYPE)
+                    .setId(String.valueOf(i))
                     .setSource(data)
                     .get();
             System.out.println(i + "\t: " + indexResponse.status());
@@ -173,7 +173,7 @@ public class ElasticsearchTests {
         tt.setId(1L);
         tt.setAge((byte) 1);
 
-        UpdateResponse response = client.prepareUpdate(INDEX, TYPE, "1")
+        UpdateResponse response = client.prepareUpdate(INDEX, CUSTOM_TYPE, "1")
                 .setDoc(JsonUtils.object2Json(tt), XContentType.JSON)
                 .get();
 
@@ -185,17 +185,17 @@ public class ElasticsearchTests {
 
     @Test
     public void testDeleteDocument() throws ExecutionException, InterruptedException {
-        DeleteResponse response = client.prepareDelete(INDEX, TYPE, "1").execute().get();
+        DeleteResponse response = client.prepareDelete(INDEX, CUSTOM_TYPE, "1").execute().get();
         log.info("deleted : {}", Objects.equals(response.getResult(), DocWriteResponse.Result.DELETED));
     }
 
     @Test
     public void testGet() {
-        GetResponse response = client.prepareGet(INDEX, TYPE, "1000")
+        GetResponse response = client.prepareGet(INDEX, CUSTOM_TYPE, "1")
                 .setRealtime(true)
                 .get();
 
-        response.getFields().forEach((k, v) -> {
+        response.getSourceAsMap().forEach((k, v) -> {
             log.info("{} : {}", k, v);
         });
 
@@ -204,7 +204,7 @@ public class ElasticsearchTests {
     }
 
     @Test
-    public void testSearch() {
+    public void testScrollSearch() {
 
         QueryBuilder qb = QueryBuilders.scriptQuery(new Script("doc['id'].value % 2 != 0"));
 
@@ -212,7 +212,7 @@ public class ElasticsearchTests {
                 .setScroll(new Scroll(new TimeValue(60000)))
                 .setFrom(0)
                 .setSize(10)
-                .setTypes(TYPE)
+                .setTypes(CUSTOM_TYPE)
                 .setQuery(qb)
                 .get();
 
