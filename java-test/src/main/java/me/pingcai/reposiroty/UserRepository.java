@@ -14,14 +14,18 @@ public class UserRepository {
     @Resource
     private UserMapper userMapper;
 
-    public User selectByName(User user) {
+    public User selectByName(String name) {
         UserExample example = new UserExample();
-        example.or().andNameEqualTo(user.getName());
+        example.or().andNameEqualTo(name);
         return Lister.firstOfList(userMapper.selectByExample(example));
     }
 
 
     public int insert(User user) {
         return userMapper.insert(user);
+    }
+
+    public User selectByPrimaryKey(Long id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 }
