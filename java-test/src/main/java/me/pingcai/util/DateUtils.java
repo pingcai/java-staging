@@ -1,7 +1,13 @@
 package me.pingcai.util;
 
+import org.omg.CORBA.DATA_CONVERSION;
+
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
@@ -11,7 +17,7 @@ import java.util.Date;
  */
 public final class DateUtils {
 
-    public static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd hh:mm:ss";
+    public static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     private static final DateTimeFormatter DEFAULT_DATETIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_PATTERN);
 
@@ -30,17 +36,8 @@ public final class DateUtils {
     }
 
     public static Date parse(String date){
-        return parse(date,DEFAULT_DATETIME_PATTERN);
-    }
-
-    public static Date parse(String date,String pattern){
-        Date d = null;
-        try {
-            new SimpleDateFormat(pattern).parse(date);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        return d;
+        LocalDateTime localDateTime = LocalDateTime.parse(date,DEFAULT_DATETIME_FORMATTER);
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     /**
@@ -50,6 +47,5 @@ public final class DateUtils {
     public static long currentTimeSecond(){
         return System.currentTimeMillis() / 1000;
     }
-
 
 }

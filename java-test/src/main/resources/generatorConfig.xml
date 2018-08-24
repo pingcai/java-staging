@@ -125,6 +125,8 @@
                  typeHandler:
             <columnOverride column="" javaType=""    jdbcType="" typeHandler=""  delimitedColumnName="" />
             -->
+            <columnOverride column="status" javaType="me.pingcai.dao.enums.UserStatus" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
+            <columnOverride column="sex" javaType="me.pingcai.dao.enums.UserSex" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
         </table>
     </context>
 </generatorConfiguration>

@@ -3,6 +3,8 @@ package me.pingcai.dao.entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import me.pingcai.dao.enums.UserSex;
+import me.pingcai.dao.enums.UserStatus;
 
 public class UserExample {
     protected String orderByClause;
@@ -65,19 +67,75 @@ public class UserExample {
     }
 
     protected abstract static class GeneratedCriteria {
+        protected List<Criterion> statusCriteria;
+
+        protected List<Criterion> sexCriteria;
+
+        protected List<Criterion> allCriteria;
+
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
             super();
             criteria = new ArrayList<Criterion>();
+            statusCriteria = new ArrayList<Criterion>();
+            sexCriteria = new ArrayList<Criterion>();
+        }
+
+        public List<Criterion> getStatusCriteria() {
+            return statusCriteria;
+        }
+
+        protected void addStatusCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            statusCriteria.add(new Criterion(condition, value, "me.pingcai.dao.handler.DbEnumTypeHandler"));
+            allCriteria = null;
+        }
+
+        protected void addStatusCriterion(String condition, UserStatus value1, UserStatus value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            statusCriteria.add(new Criterion(condition, value1, value2, "me.pingcai.dao.handler.DbEnumTypeHandler"));
+            allCriteria = null;
+        }
+
+        public List<Criterion> getSexCriteria() {
+            return sexCriteria;
+        }
+
+        protected void addSexCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            sexCriteria.add(new Criterion(condition, value, "me.pingcai.dao.handler.DbEnumTypeHandler"));
+            allCriteria = null;
+        }
+
+        protected void addSexCriterion(String condition, UserSex value1, UserSex value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            sexCriteria.add(new Criterion(condition, value1, value2, "me.pingcai.dao.handler.DbEnumTypeHandler"));
+            allCriteria = null;
         }
 
         public boolean isValid() {
-            return criteria.size() > 0;
+            return criteria.size() > 0
+                || statusCriteria.size() > 0
+                || sexCriteria.size() > 0;
         }
 
         public List<Criterion> getAllCriteria() {
-            return criteria;
+            if (allCriteria == null) {
+                allCriteria = new ArrayList<Criterion>();
+                allCriteria.addAll(criteria);
+                allCriteria.addAll(statusCriteria);
+                allCriteria.addAll(sexCriteria);
+            }
+            return allCriteria;
         }
 
         public List<Criterion> getCriteria() {
@@ -89,6 +147,7 @@ public class UserExample {
                 throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
+            allCriteria = null;
         }
 
         protected void addCriterion(String condition, Object value, String property) {
@@ -96,6 +155,7 @@ public class UserExample {
                 throw new RuntimeException("Value for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value));
+            allCriteria = null;
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
@@ -103,6 +163,7 @@ public class UserExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+            allCriteria = null;
         }
 
         public Criteria andIdIsNull() {
@@ -175,53 +236,53 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Byte value) {
-            addCriterion("status =", value, "status");
+        public Criteria andStatusEqualTo(UserStatus value) {
+            addStatusCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Byte value) {
-            addCriterion("status <>", value, "status");
+        public Criteria andStatusNotEqualTo(UserStatus value) {
+            addStatusCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Byte value) {
-            addCriterion("status >", value, "status");
+        public Criteria andStatusGreaterThan(UserStatus value) {
+            addStatusCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
-            addCriterion("status >=", value, "status");
+        public Criteria andStatusGreaterThanOrEqualTo(UserStatus value) {
+            addStatusCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Byte value) {
-            addCriterion("status <", value, "status");
+        public Criteria andStatusLessThan(UserStatus value) {
+            addStatusCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Byte value) {
-            addCriterion("status <=", value, "status");
+        public Criteria andStatusLessThanOrEqualTo(UserStatus value) {
+            addStatusCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Byte> values) {
-            addCriterion("status in", values, "status");
+        public Criteria andStatusIn(List<UserStatus> values) {
+            addStatusCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Byte> values) {
-            addCriterion("status not in", values, "status");
+        public Criteria andStatusNotIn(List<UserStatus> values) {
+            addStatusCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Byte value1, Byte value2) {
-            addCriterion("status between", value1, value2, "status");
+        public Criteria andStatusBetween(UserStatus value1, UserStatus value2) {
+            addStatusCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
-            addCriterion("status not between", value1, value2, "status");
+        public Criteria andStatusNotBetween(UserStatus value1, UserStatus value2) {
+            addStatusCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
 
@@ -305,53 +366,53 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andSexEqualTo(Byte value) {
-            addCriterion("sex =", value, "sex");
+        public Criteria andSexEqualTo(UserSex value) {
+            addSexCriterion("sex =", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexNotEqualTo(Byte value) {
-            addCriterion("sex <>", value, "sex");
+        public Criteria andSexNotEqualTo(UserSex value) {
+            addSexCriterion("sex <>", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexGreaterThan(Byte value) {
-            addCriterion("sex >", value, "sex");
+        public Criteria andSexGreaterThan(UserSex value) {
+            addSexCriterion("sex >", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexGreaterThanOrEqualTo(Byte value) {
-            addCriterion("sex >=", value, "sex");
+        public Criteria andSexGreaterThanOrEqualTo(UserSex value) {
+            addSexCriterion("sex >=", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexLessThan(Byte value) {
-            addCriterion("sex <", value, "sex");
+        public Criteria andSexLessThan(UserSex value) {
+            addSexCriterion("sex <", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexLessThanOrEqualTo(Byte value) {
-            addCriterion("sex <=", value, "sex");
+        public Criteria andSexLessThanOrEqualTo(UserSex value) {
+            addSexCriterion("sex <=", value, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexIn(List<Byte> values) {
-            addCriterion("sex in", values, "sex");
+        public Criteria andSexIn(List<UserSex> values) {
+            addSexCriterion("sex in", values, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexNotIn(List<Byte> values) {
-            addCriterion("sex not in", values, "sex");
+        public Criteria andSexNotIn(List<UserSex> values) {
+            addSexCriterion("sex not in", values, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexBetween(Byte value1, Byte value2) {
-            addCriterion("sex between", value1, value2, "sex");
+        public Criteria andSexBetween(UserSex value1, UserSex value2) {
+            addSexCriterion("sex between", value1, value2, "sex");
             return (Criteria) this;
         }
 
-        public Criteria andSexNotBetween(Byte value1, Byte value2) {
-            addCriterion("sex not between", value1, value2, "sex");
+        public Criteria andSexNotBetween(UserSex value1, UserSex value2) {
+            addSexCriterion("sex not between", value1, value2, "sex");
             return (Criteria) this;
         }
 

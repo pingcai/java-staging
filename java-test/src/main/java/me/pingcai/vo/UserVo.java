@@ -1,10 +1,13 @@
-package me.pingcai.dao.entity;
+package me.pingcai.vo;
 
-import java.util.Date;
 import me.pingcai.dao.enums.UserSex;
 import me.pingcai.dao.enums.UserStatus;
 
-public class User {
+import java.util.Date;
+import java.util.Objects;
+
+public class UserVo {
+
     private Long id;
 
     private UserStatus status;
@@ -19,7 +22,10 @@ public class User {
 
     private String comment;
 
-    public User(Long id, UserStatus status, String name, UserSex sex, Byte age, Date birthday, String comment) {
+    public UserVo() {
+    }
+
+    public UserVo(Long id, UserStatus status, String name, UserSex sex, Byte age, Date birthday, String comment) {
         this.id = id;
         this.status = status;
         this.name = name;
@@ -27,10 +33,6 @@ public class User {
         this.age = age;
         this.birthday = birthday;
         this.comment = comment;
-    }
-
-    public User() {
-        super();
     }
 
     public Long getId() {
@@ -87,5 +89,24 @@ public class User {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserVo user = (UserVo) o;
+        return Objects.equals(id, user.id) &&
+                status == user.status &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(sex, user.sex) &&
+                Objects.equals(age, user.age) &&
+                Objects.equals(birthday, user.birthday) &&
+                Objects.equals(comment, user.comment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, status, name, sex, age, birthday, comment);
     }
 }

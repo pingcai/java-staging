@@ -4,9 +4,9 @@
   <resultMap id="BaseResultMap" type="me.pingcai.dao.entity.User">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="status" javaType="me.pingcai.dao.enums.UserStatus" jdbcType="TINYINT" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="sex" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="sex" javaType="me.pingcai.dao.enums.UserSex" jdbcType="TINYINT" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler" />
       <arg column="age" javaType="java.lang.Byte" jdbcType="TINYINT" />
       <arg column="birthday" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -36,6 +36,44 @@
                 </when>
               </choose>
             </foreach>
+            <foreach collection="criteria.statusCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler} and #{criterion.secondValue,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.sexCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler} and #{criterion.secondValue,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
           </trim>
         </if>
       </foreach>
@@ -61,6 +99,44 @@
                   and ${criterion.condition}
                   <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.statusCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler} and #{criterion.secondValue,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.sexCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler} and #{criterion.secondValue,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
                   </foreach>
                 </when>
               </choose>
@@ -104,12 +180,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="me.pingcai.dao.entity.User">
-    insert into user (id, status, name, 
-      sex, age, birthday, 
-      comment)
-    values (#{id,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{comment,jdbcType=VARCHAR})
+    insert into user (id, status, 
+      name, sex, 
+      age, birthday, comment
+      )
+    values (#{id,jdbcType=BIGINT}, #{status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}, 
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}, 
+      #{age,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="me.pingcai.dao.entity.User">
     insert into user
@@ -141,13 +219,13 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="status != null">
-        #{status,jdbcType=TINYINT},
+        #{status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        #{sex,jdbcType=TINYINT},
+        #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       </if>
       <if test="age != null">
         #{age,jdbcType=TINYINT},
@@ -173,13 +251,13 @@
         id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=TINYINT},
+        status = #{record.status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=TINYINT},
+        sex = #{record.sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       </if>
       <if test="record.age != null">
         age = #{record.age,jdbcType=TINYINT},
@@ -198,9 +276,9 @@
   <update id="updateByExample" parameterType="map">
     update user
     set id = #{record.id,jdbcType=BIGINT},
-      status = #{record.status,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       name = #{record.name,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=TINYINT},
+      sex = #{record.sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       age = #{record.age,jdbcType=TINYINT},
       birthday = #{record.birthday,jdbcType=TIMESTAMP},
       comment = #{record.comment,jdbcType=VARCHAR}
@@ -212,13 +290,13 @@
     update user
     <set>
       <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
+        status = #{status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        sex = #{sex,jdbcType=TINYINT},
+        sex = #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       </if>
       <if test="age != null">
         age = #{age,jdbcType=TINYINT},
@@ -234,9 +312,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="me.pingcai.dao.entity.User">
     update user
-    set status = #{status,jdbcType=TINYINT},
+    set status = #{status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       name = #{name,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=TINYINT},
+      sex = #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       age = #{age,jdbcType=TINYINT},
       birthday = #{birthday,jdbcType=TIMESTAMP},
       comment = #{comment,jdbcType=VARCHAR}
