@@ -2,13 +2,11 @@
 <configuration status="WARN">
 
     <Properties>
-        <property name="appName">java-staging</property>
-        <property name="logPath">/tmp</property>
         <property name="commonLayoutPattern">[%d{yyyy/MM/dd HH:mm:ss}] [%p] %l: %m%n</property>
-        <property name="infoFileName">${logPath}/${appName}.log</property>
-        <property name="errorFileName">${logPath}/${appName}.error.log</property>
-        <property name="filePattern">${appName}.log.%d{yyyy-MM-dd}</property>
-        <property name="errorFilePattern">${appName}.error.log.%d{yyyy-MM-dd}</property>
+        <property name="infoFileName">${log4j2.log.path}/${app.name}.log</property>
+        <property name="errorFileName">${log4j2.log.path}/${app.name}.error.log</property>
+        <property name="filePattern">${app.name}.log.%d{yyyy-MM-dd}</property>
+        <property name="errorFilePattern">${app.name}.error.log.%d{yyyy-MM-dd}</property>
     </Properties>
 
     <Appenders>

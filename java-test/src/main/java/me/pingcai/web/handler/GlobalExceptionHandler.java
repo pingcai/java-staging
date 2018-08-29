@@ -7,6 +7,9 @@ import me.pingcai.vo.ResponseFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import java.util.Objects;
 
 /**
  * create by 黄平财 at 2018/1/7 13:22
@@ -25,6 +28,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = ApiException.class)
     public Object throwable(ApiException e) {
         return ResponseFactory.build(e.getError());
+    }
+
+    @ExceptionHandler
+    public Object methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e){
+        String msg = "无法将参数 " + e.getName() + " 设置为 " + e.getValue();
+        return ResponseFactory.build(HttpError.INVALID_PARAM,msg);
     }
 
 }

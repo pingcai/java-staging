@@ -1,5 +1,6 @@
 package me.pingcai.web;
 
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import me.pingcai.dao.entity.User;
 import me.pingcai.enums.HttpError;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -29,7 +31,9 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public Object insert(UserVo user) {
         Long id = userService.insertIfNotExist(user);
-        return ResponseFactory.buildSuccess(id);
+        Map<String,Long> data = Maps.newHashMap();
+        data.put("id",id);
+        return ResponseFactory.buildSuccess(data);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)

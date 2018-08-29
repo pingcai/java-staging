@@ -49,6 +49,7 @@
         </property>
     </bean>
 
+    <!--日期参数解析-->
     <bean id="dateConverter" class="me.pingcai.web.converter.DateConverter"/>
 
     <bean id="multipartResolver"

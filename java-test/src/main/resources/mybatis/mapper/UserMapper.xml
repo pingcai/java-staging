@@ -179,7 +179,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="me.pingcai.dao.entity.User">
+  <insert id="insert" parameterType="me.pingcai.dao.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into user (id, status, 
       name, sex, 
       age, birthday, comment
@@ -189,7 +189,7 @@
       #{age,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="me.pingcai.dao.entity.User">
+  <insert id="insertSelective" parameterType="me.pingcai.dao.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

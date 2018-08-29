@@ -5,24 +5,23 @@ package me.pingcai.dao.enums;
  * @author huangpingcai
  * @since 2018/8/24 23:12
  */
-public enum  UserStatus implements DbEnum<Integer>{
-    /*尚未激活*/
-    NONACTIVATED(0),
+public enum  UserStatus implements DbEnum{
+    NONACTIVATED(0,"尚未激活"),
 
-    /*正常*/
-    NORMAL(1),
+    NORMAL(1,"正常"),
 
-    /*冻结*/
-    FREEZE(2),
+    FREEZE(2,"已冻结"),
 
-    /*已注销*/
-    DELETED(3)
+    DELETED(3,"已注销")
     ;
 
     private Integer dbValue;
 
-    UserStatus(Integer dbValue) {
+    private String desc;
+
+    UserStatus(Integer dbValue, String desc) {
         this.dbValue = dbValue;
+        this.desc = desc;
     }
 
     @Override
@@ -30,4 +29,11 @@ public enum  UserStatus implements DbEnum<Integer>{
         return dbValue;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 }

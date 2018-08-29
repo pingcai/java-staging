@@ -5,7 +5,7 @@ package me.pingcai.dao.enums;
  * @author huangpingcai
  * @since 2018/8/24 23:12
  */
-public enum UserSex implements DbEnum<Integer>{
+public enum UserSex implements DbEnum{
     /*男*/
     MALE(0),
 

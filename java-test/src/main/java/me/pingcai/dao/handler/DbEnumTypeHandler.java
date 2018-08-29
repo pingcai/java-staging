@@ -14,7 +14,7 @@ import java.util.Objects;
  * @author huangpingcai
  * @since 2018/8/24 23:24
  */
-public class DbEnumTypeHandler<E extends Enum<?> & DbEnum> extends BaseTypeHandler<DbEnum<?>> {
+public class DbEnumTypeHandler<E extends Enum<E> & DbEnum> extends BaseTypeHandler<E> {
 
     private Class<E> type;
 
@@ -29,29 +29,29 @@ public class DbEnumTypeHandler<E extends Enum<?> & DbEnum> extends BaseTypeHandl
     }
 
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, DbEnum parameter, JdbcType jdbcType) throws SQLException {
-        ps.setObject(i,parameter.getDbValue());
+    public void setNonNullParameter(PreparedStatement ps, int i, E parameter, JdbcType jdbcType) throws SQLException {
+        ps.setInt(i,parameter.getDbValue());
     }
 
     @Override
-    public DbEnum getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        Object dbValue = rs.getObject(columnName);
-        return rs.wasNull() ? null : getEnum(dbValue);
+    public E getNullableResult(ResultSet rs, String columnName) throws SQLException {
+        int dbValue = rs.getInt(columnName);
+        return rs.wasNull() ? null : toEnum(dbValue);
     }
 
     @Override
-    public DbEnum getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        Object dbValue = rs.getObject(columnIndex);
-        return rs.wasNull() ? null : getEnum(dbValue);
+    public E getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+        int dbValue = rs.getInt(columnIndex);
+        return rs.wasNull() ? null : toEnum(dbValue);
     }
 
     @Override
-    public DbEnum getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        Object dbValue = cs.getObject(columnIndex);
-        return cs.wasNull() ? null : getEnum(dbValue);
+    public E getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+        int dbValue = cs.getInt(columnIndex);
+        return cs.wasNull() ? null : toEnum(dbValue);
     }
 
-    private E getEnum(Object dbValue){
+    private E toEnum(int dbValue){
         try {
             E[] enumConstants = type.getEnumConstants();
             for (E e : enumConstants) {
@@ -60,7 +60,7 @@ public class DbEnumTypeHandler<E extends Enum<?> & DbEnum> extends BaseTypeHandl
                 }
             }
         } catch (Exception ex) {
-            throw new IllegalArgumentException("Cannot convert " + dbValue + " to " + type.getSimpleName() + " by code value.", ex);
+            throw new IllegalArgumentException("cannot convert " + dbValue + " to " + type.getSimpleName(), ex);
         }
         return null;
     }
