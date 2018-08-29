@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long insertIfNotExist(@RequestParam(required = false) UserVo user){
         if(!check(user)){
-            throw ApiException.create(HttpError.INVALID_PARAM);
+            throw ApiException.newInstance(HttpError.INVALID_PARAM);
         }
 
         User dbUser = userRepository.selectByName(user.getName());
         if(dbUser != null){
-            throw ApiException.create(HttpError.EXIST);
+            throw ApiException.newInstance(HttpError.EXIST);
         }
         dbUser = new User();
         BeanUtils.copyProperties(user,dbUser);

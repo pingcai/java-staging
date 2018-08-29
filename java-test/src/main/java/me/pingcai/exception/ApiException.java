@@ -10,7 +10,7 @@ public class ApiException extends RuntimeException{
 
     HttpError error;
 
-    public static ApiException create(HttpError error){
+    public static ApiException newInstance(HttpError error){
         return new ApiException(error);
     }
 
