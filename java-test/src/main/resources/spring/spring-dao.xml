@@ -29,15 +29,13 @@
     </bean>
 
     <!-- 数据源 -->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driverClass}" />
-        <property name="url" value="${jdbc.url}" />
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
-        <property name="maxWait" value="${jdbc.maxWait}" />
-        <property name="maxActive" value="${jdbc.maxActive}" />
-        <property name="initialSize" value="${jdbc.initialSize}" />
-        <property name="minIdle" value="${jdbc.minIdle}" />
+        <property name="connectionTimeout" value="${jdbc.connectionTimeout}"/>
+        <property name="maximumPoolSize" value="${jdbc.maximumPoolSize}" />
+        <property name="minimumIdle" value="${jdbc.minimumIdle}" />
     </bean>
 
     <!-- MyBatis 事务管理 -->
