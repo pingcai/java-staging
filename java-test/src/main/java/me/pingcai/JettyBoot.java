@@ -16,6 +16,10 @@ public class JettyBoot {
     private static final String PORT = "port";
     private static final String CONTEXT_PATH = "contextPath";
 
+    private static final int DEFAULT_PORT = 8080;
+    private static final String DEFAULT_CONTEXT_PATH = "/";
+
+
     public static void main(String[] args) throws Exception {
 
         JettyConfig config = initArguments(args);
@@ -83,8 +87,8 @@ public class JettyBoot {
 
         private String webDir = JettyConfig.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
-        private int port = 8080;
-        private String contextPath = "/";
+        private int port = DEFAULT_PORT;
+        private String contextPath = DEFAULT_CONTEXT_PATH;
 
         public JettyConfig() {
         }
