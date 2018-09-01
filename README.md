@@ -2,6 +2,7 @@
 
 JAVA WEB 开发脚手架，集成常见的组件
 
+- Jetty
 - Spring
 - Mybatis
 - Slf4j + Log4j2
@@ -26,17 +27,10 @@ CREATE TABLE user(id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,status TINYINT U
 ' -h localhost -uroot -p
 ```
 
-
 ### 测试
 
 ```    
-mvn jetty:run
-
-curl -X GET http://127.0.0.1:7878/alive
-
-或
-
-IDEA 右侧 Maven 插件
+run/debug JettyBoot
 
 ```
 
@@ -44,17 +38,17 @@ IDEA 右侧 Maven 插件
 
 ### 配置
 
-1. 选择环境(dev/test/staging/prod)
+1. 设置环境(dev/test/staging/prod)
 
     export profile='pord'
 
-2. 运行日志
+2. 设置运行日志
 
     env.properties -> log4j2.log.path
 
-3. Jetty参数
+3. 设置Jetty参数
 
-    含义见 JettyBoot, 并修改 java-staging/java-test/deploy/build.sh
+    含义见JettyBoot, 并修改 java-staging/java-test/deploy/build.sh
 
 ### 构建
 

@@ -3,7 +3,7 @@
 PWD=`pwd`
 cd ..
 
-# 运行日志
+# 控制运行日志, 可以直接观察log4j的日志, 这里直接将日志丢弃
 runlog=/dev/null
 echo "run log : $runlog"
 
