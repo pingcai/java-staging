@@ -1,4 +1,4 @@
-### 说明
+## 说明
 
 JAVA WEB 开发脚手架，集成常见的组件
 
@@ -6,19 +6,19 @@ JAVA WEB 开发脚手架，集成常见的组件
 - Mybatis
 - Slf4j + Log4j2
 
-### 使用
+## 开发
 
-拉取代码
+### 拉取代码
 
     git clone git@github.com:pingcai/java-staging.git
     
     cd java-staging
 
-修改配置
+### 修改配置
 
-    java-test/src/main/resources/conf/dev/config.properties
+    java-staging/java-test/src/main/profile/dev/env.properties
 
-数据库
+### 数据库
 
 ```
 mysql -e 'CREATE DATABASE java_staging DEFAULT CHARSET utf8mb4;USE java_staging; \
@@ -27,7 +27,7 @@ CREATE TABLE user(id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,status TINYINT U
 ```
 
 
-测试
+### 测试
 
 ```    
 mvn jetty:run
@@ -40,7 +40,31 @@ IDEA 右侧 Maven 插件
 
 ```
 
-### 其它
+## 部署
+
+### 配置
+
+1. 选择环境(dev/test/staging/prod)
+
+    export profile='pord'
+
+2. 运行日志
+
+    env.properties -> log4j2.log.path
+
+3. Jetty参数
+
+    含义见 JettyBoot, 并修改 java-staging/java-test/deploy/build.sh
+
+### 构建
+
+    java-staging/java-test/deploy/build.sh
+
+### 运行
+
+    java-staging/java-test/deploy/run.sh
+
+## 其它
 禁用ipv6
 ```
 MAVEN_OPTS='-Xmx1024m -Xmx1024m -Djava.net.preferIPv4Stack=true'

@@ -35,9 +35,13 @@ public class UserController {
     public Object insert(UserVo user, HttpServletRequest request) {
         user.setRegisterIp(IpUtils.getIp(request));
         Long id = userService.insertIfNotExist(user);
-        Map<String,Long> data = Maps.newHashMap();
-        data.put("id",id);
-        return ResponseFactory.buildSuccess(data);
+        if(id > 0){
+            Map<String,Long> data = Maps.newHashMap();
+            data.put("id",id);
+            log.info("add user success !");
+            return ResponseFactory.buildSuccess(data);
+        }
+        return ResponseFactory.build(HttpError.FAIL);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
