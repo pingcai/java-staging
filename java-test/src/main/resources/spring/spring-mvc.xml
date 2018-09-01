@@ -9,6 +9,8 @@
 
     <context:component-scan base-package="me.pingcai.web"/>
 
+    <mvc:default-servlet-handler/>
+
     <mvc:resources mapping="/static/**" location="classpath:/static/"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
