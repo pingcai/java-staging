@@ -19,7 +19,7 @@
     </bean>
 
     <!--解决编码问题-->
-    <mvc:annotation-driven conversion-service="conversionService">
+    <mvc:annotation-driven conversion-service="conversionService" validator="validator">
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg name="defaultCharset" value="utf-8"/>
@@ -50,9 +50,20 @@
             </set>
         </property>
     </bean>
-
     <!--日期参数解析-->
     <bean id="dateConverter" class="me.pingcai.web.converter.DateConverter"/>
+
+    <!--参数校验-->
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+        <!--见: org.hibernate.validator.HibernateValidatorConfiguration-->
+        <property name="validationPropertyMap">
+            <props>
+                <prop key="hibernate.validator.fail_fast">true</prop>
+            </props>
+        </property>
+    </bean>
 
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

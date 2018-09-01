@@ -426,52 +426,52 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andAgeEqualTo(Byte value) {
+        public Criteria andAgeEqualTo(Integer value) {
             addCriterion("age =", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeNotEqualTo(Byte value) {
+        public Criteria andAgeNotEqualTo(Integer value) {
             addCriterion("age <>", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeGreaterThan(Byte value) {
+        public Criteria andAgeGreaterThan(Integer value) {
             addCriterion("age >", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeGreaterThanOrEqualTo(Byte value) {
+        public Criteria andAgeGreaterThanOrEqualTo(Integer value) {
             addCriterion("age >=", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeLessThan(Byte value) {
+        public Criteria andAgeLessThan(Integer value) {
             addCriterion("age <", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeLessThanOrEqualTo(Byte value) {
+        public Criteria andAgeLessThanOrEqualTo(Integer value) {
             addCriterion("age <=", value, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeIn(List<Byte> values) {
+        public Criteria andAgeIn(List<Integer> values) {
             addCriterion("age in", values, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeNotIn(List<Byte> values) {
+        public Criteria andAgeNotIn(List<Integer> values) {
             addCriterion("age not in", values, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeBetween(Byte value1, Byte value2) {
+        public Criteria andAgeBetween(Integer value1, Integer value2) {
             addCriterion("age between", value1, value2, "age");
             return (Criteria) this;
         }
 
-        public Criteria andAgeNotBetween(Byte value1, Byte value2) {
+        public Criteria andAgeNotBetween(Integer value1, Integer value2) {
             addCriterion("age not between", value1, value2, "age");
             return (Criteria) this;
         }

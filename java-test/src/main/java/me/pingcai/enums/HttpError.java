@@ -8,7 +8,7 @@ public enum HttpError{
     SUCCESS(1,"操作成功"),
     FAIL(2,"操作失败"),
 
-    ERROR(1000,"系统异常"),
+    ERROR(1000,"系统内部异常"),
     INVALID_PARAM(10010,"参数不合法"),
     NOT_EXIST(10020,"不存在"),
     EXIST(10030,"已存在")

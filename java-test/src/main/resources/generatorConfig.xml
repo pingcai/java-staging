@@ -130,6 +130,7 @@
             <columnOverride column="status" javaType="me.pingcai.dao.enums.UserStatus" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
             <columnOverride column="sex" javaType="me.pingcai.dao.enums.UserSex" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
             <columnOverride column="register_ip" javaType="java.lang.Long"/>
+            <columnOverride column="age" javaType="java.lang.Integer"/>
         </table>
     </context>
 </generatorConfiguration>

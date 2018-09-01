@@ -9,6 +9,8 @@ import me.pingcai.util.IpUtils;
 import me.pingcai.vo.ResponseFactory;
 import me.pingcai.vo.UserVo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +34,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Object insert(UserVo user, HttpServletRequest request) {
+    public Object insert(@Validated UserVo user, HttpServletRequest request) {
         user.setRegisterIp(IpUtils.getIp(request));
         Long id = userService.insertIfNotExist(user);
         if(id > 0){

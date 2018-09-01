@@ -7,7 +7,7 @@
       <arg column="status" javaType="me.pingcai.dao.enums.UserStatus" jdbcType="TINYINT" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="sex" javaType="me.pingcai.dao.enums.UserSex" jdbcType="TINYINT" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler" />
-      <arg column="age" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="age" javaType="java.lang.Integer" jdbcType="TINYINT" />
       <arg column="birthday" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="register_ip" javaType="java.lang.Long" jdbcType="INTEGER" />
@@ -180,7 +180,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="me.pingcai.dao.entity.User"  useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="me.pingcai.dao.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into user (id, status, 
       name, sex, 
       age, birthday, comment, 
@@ -190,7 +190,7 @@
       #{age,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}, 
       #{registerIp,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="me.pingcai.dao.entity.User"  useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="me.pingcai.dao.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

@@ -67,8 +67,6 @@
                 <version>${jetty.version}</version>
             </dependency>
 
-
-
             <!--Javaweb-->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -133,6 +131,12 @@
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>6.0.12.Final</version>
             </dependency>
 
             <dependency>

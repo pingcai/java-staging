@@ -13,7 +13,7 @@ public class User {
 
     private UserSex sex;
 
-    private Byte age;
+    private Integer age;
 
     private Date birthday;
 
@@ -21,7 +21,7 @@ public class User {
 
     private Long registerIp;
 
-    public User(Long id, UserStatus status, String name, UserSex sex, Byte age, Date birthday, String comment, Long registerIp) {
+    public User(Long id, UserStatus status, String name, UserSex sex, Integer age, Date birthday, String comment, Long registerIp) {
         this.id = id;
         this.status = status;
         this.name = name;
@@ -68,11 +68,11 @@ public class User {
         this.sex = sex;
     }
 
-    public Byte getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(Byte age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
