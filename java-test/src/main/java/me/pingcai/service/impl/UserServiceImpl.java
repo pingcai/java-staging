@@ -28,11 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long insertIfNotExist(@RequestParam(required = false) UserVo user){
-        if(!check(user)){
-            throw ApiException.newInstance(HttpError.INVALID_PARAM);
-        }
-
+    public Long insertIfNotExist(UserVo user){
         User dbUser = userRepository.selectByName(user.getName());
         if(dbUser != null){
             throw ApiException.newInstance(HttpError.EXIST);
@@ -43,10 +39,5 @@ public class UserServiceImpl implements UserService {
         userRepository.insert(dbUser);
         return dbUser.getId();
     }
-
-    private boolean check(UserVo user) {
-        return user != null && user.getName() != null;
-    }
-
 
 }
