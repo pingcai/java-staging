@@ -2,7 +2,13 @@ package me.pingcai.vo;
 
 import me.pingcai.dao.enums.UserSex;
 import me.pingcai.dao.enums.UserStatus;
+import me.pingcai.web.validator.NameCheck;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,11 +18,14 @@ public class UserVo {
 
     private UserStatus status;
 
+    @NameCheck
     private String name;
 
+    @NotNull(message = "性别不能为空")
     private UserSex sex;
 
-    private Byte age;
+    @Range(min = 0,max = 300,message = "年龄不能小于{min}或大于{max}")
+    private Integer age;
 
     private Date birthday;
 
@@ -67,11 +76,11 @@ public class UserVo {
         this.sex = sex;
     }
 
-    public Byte getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(Byte age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
