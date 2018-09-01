@@ -5,6 +5,7 @@ import me.pingcai.enums.HttpError;
 import me.pingcai.exception.ApiException;
 import me.pingcai.reposiroty.UserRepository;
 import me.pingcai.service.UserService;
+import me.pingcai.util.IpUtils;
 import me.pingcai.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
         }
         dbUser = new User();
         BeanUtils.copyProperties(user,dbUser);
+        dbUser.setRegisterIp(IpUtils.ip2Long(user.getRegisterIp()));
         userRepository.insert(dbUser);
         return dbUser.getId();
     }

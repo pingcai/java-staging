@@ -605,6 +605,66 @@ public class UserExample {
             addCriterion("comment not between", value1, value2, "comment");
             return (Criteria) this;
         }
+
+        public Criteria andRegisterIpIsNull() {
+            addCriterion("register_ip is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpIsNotNull() {
+            addCriterion("register_ip is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpEqualTo(Long value) {
+            addCriterion("register_ip =", value, "registerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpNotEqualTo(Long value) {
+            addCriterion("register_ip <>", value, "registerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpGreaterThan(Long value) {
+            addCriterion("register_ip >", value, "registerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpGreaterThanOrEqualTo(Long value) {
+            addCriterion("register_ip >=", value, "registerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpLessThan(Long value) {
+            addCriterion("register_ip <", value, "registerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpLessThanOrEqualTo(Long value) {
+            addCriterion("register_ip <=", value, "registerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpIn(List<Long> values) {
+            addCriterion("register_ip in", values, "registerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpNotIn(List<Long> values) {
+            addCriterion("register_ip not in", values, "registerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpBetween(Long value1, Long value2) {
+            addCriterion("register_ip between", value1, value2, "registerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterIpNotBetween(Long value1, Long value2) {
+            addCriterion("register_ip not between", value1, value2, "registerIp");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

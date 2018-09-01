@@ -10,6 +10,7 @@
       <arg column="age" javaType="java.lang.Byte" jdbcType="TINYINT" />
       <arg column="birthday" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="register_ip" javaType="java.lang.Long" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -147,7 +148,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, status, name, sex, age, birthday, comment
+    id, status, name, sex, age, birthday, comment, register_ip
   </sql>
   <select id="selectByExample" parameterType="me.pingcai.dao.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -179,17 +180,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="me.pingcai.dao.entity.User" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="me.pingcai.dao.entity.User"  useGeneratedKeys="true" keyProperty="id">
     insert into user (id, status, 
       name, sex, 
-      age, birthday, comment
-      )
+      age, birthday, comment, 
+      register_ip)
     values (#{id,jdbcType=BIGINT}, #{status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}, 
       #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}, 
-      #{age,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}
-      )
+      #{age,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}, 
+      #{registerIp,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="me.pingcai.dao.entity.User" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="me.pingcai.dao.entity.User"  useGeneratedKeys="true" keyProperty="id">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -213,6 +214,9 @@
       <if test="comment != null">
         comment,
       </if>
+      <if test="registerIp != null">
+        register_ip,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -235,6 +239,9 @@
       </if>
       <if test="comment != null">
         #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="registerIp != null">
+        #{registerIp,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -268,6 +275,9 @@
       <if test="record.comment != null">
         comment = #{record.comment,jdbcType=VARCHAR},
       </if>
+      <if test="record.registerIp != null">
+        register_ip = #{record.registerIp,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -281,7 +291,8 @@
       sex = #{record.sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       age = #{record.age,jdbcType=TINYINT},
       birthday = #{record.birthday,jdbcType=TIMESTAMP},
-      comment = #{record.comment,jdbcType=VARCHAR}
+      comment = #{record.comment,jdbcType=VARCHAR},
+      register_ip = #{record.registerIp,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -307,6 +318,9 @@
       <if test="comment != null">
         comment = #{comment,jdbcType=VARCHAR},
       </if>
+      <if test="registerIp != null">
+        register_ip = #{registerIp,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -317,7 +331,8 @@
       sex = #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
       age = #{age,jdbcType=TINYINT},
       birthday = #{birthday,jdbcType=TIMESTAMP},
-      comment = #{comment,jdbcType=VARCHAR}
+      comment = #{comment,jdbcType=VARCHAR},
+      register_ip = #{registerIp,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

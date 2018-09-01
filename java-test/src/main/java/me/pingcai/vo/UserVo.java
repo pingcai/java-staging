@@ -22,17 +22,17 @@ public class UserVo {
 
     private String comment;
 
+    private String registerIp;
+
     public UserVo() {
     }
 
-    public UserVo(Long id, UserStatus status, String name, UserSex sex, Byte age, Date birthday, String comment) {
-        this.id = id;
-        this.status = status;
-        this.name = name;
-        this.sex = sex;
-        this.age = age;
-        this.birthday = birthday;
-        this.comment = comment;
+    public String getRegisterIp() {
+        return registerIp;
+    }
+
+    public void setRegisterIp(String registerIp) {
+        this.registerIp = registerIp;
     }
 
     public Long getId() {
