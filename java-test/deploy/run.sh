@@ -5,7 +5,7 @@ cd ..
 
 # 控制运行日志, 可以直接观察log4j的日志, 这里直接将日志丢弃
 runlog=/dev/null
-echo "run log : $runlog"
+echo "run log: $runlog"
 
 # 虚拟机参数
 JAVA_OPTS="
@@ -29,12 +29,12 @@ JAVA_OPTS="
 -XX:+HeapDumpOnOutOfMemoryError
 -Dfile.encoding=UTF-8
 -Djava.net.preferIPv4Stack=true"
-echo "JAVA_OPTS : $JAVA_OPTS"
+echo "JAVA_OPTS: $JAVA_OPTS"
 
 # 主函数参数
 MAIN_CLASS_ARGS="port=8080"
-echo "main class args : $MAIN_CLASS_ARGS"
+echo "main class args: $MAIN_CLASS_ARGS"
 
-exec java $JAVA_OPTS -jar target/java-test.jar $MAIN_CLASS_ARGS >> $runlog 2>&1
+exec nohup java $JAVA_OPTS -jar target/java-test.jar $MAIN_CLASS_ARGS >> $runlog 2>&1 &
 
 cd $PWD

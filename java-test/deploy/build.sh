@@ -4,7 +4,7 @@
 
 prof=$profile
 [ ! $a ] && export prof=dev
-echo "current environment : $prof"
+echo "current environment: $prof"
 
 PWD=`pwd`
 cd ..
