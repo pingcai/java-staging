@@ -12,6 +12,9 @@ log/
 *.log
 *.log.*
 
+# maven-release-plugin
+release.properties
+
 #linux下生成的备份文件
 ~*
 ～*
