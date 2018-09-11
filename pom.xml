@@ -12,7 +12,7 @@
 
     <properties>
 
-        <scm.trunk.url>https://github.com/pingcai/java-staging</scm.trunk.url>
+        <scm.trunk.url>scm:git:git@github.com:pingcai/java-staging.git</scm.trunk.url>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.source.version>1.8</java.source.version>
@@ -280,8 +280,8 @@
 
     <scm>
         <url>{scm.trunk.url}</url>
-        <connection>scm:git:${scm.trunk.url}.git</connection>
-        <tag>java-staging-1.0</tag>
+        <connection>{scm.trunk.url}</connection>
+        <tag>这里写release时的版本号,可以不写,遵循项目版本</tag>
     </scm>
 
     <build>
@@ -336,12 +336,6 @@
                     <version>2.5.3</version>
                 </plugin>
 
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-
                 <!--https://blog.csdn.net/fuck487/article/details/77503925-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -353,10 +347,6 @@
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
                     <version>${mybatis-generator.version}</version>
-                    <configuration>
-                        <verbose>true</verbose>
-                        <overwrite>true</overwrite>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -378,21 +368,16 @@
                 <resources>
                     <resource>
                         <directory>src/main/profile/dev</directory>
-                        <filtering>false</filtering>
-                    </resource>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <includes>
-                            <include>log4j2.xml</include>
-                        </includes>
-                        <filtering>true</filtering>
                     </resource>
                     <resource>
                         <directory>src/main/resources</directory>
                         <includes>
                             <include>**/*.*</include>
                         </includes>
-                        <filtering>false</filtering>
+                        <filtering>true</filtering>
+                    </resource>
+                    <resource>
+                        <directory>src/main/webapp</directory>
                     </resource>
                 </resources>
             </build>
