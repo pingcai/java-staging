@@ -8,17 +8,21 @@ import me.pingcai.service.UserService;
 import me.pingcai.util.IpUtils;
 import me.pingcai.vo.UserVo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 
 @Service
+@CacheConfig(cacheNames = {"userCache"})
 public class UserServiceImpl implements UserService {
 
     @Resource
     private UserRepository userRepository;
 
+    @Cacheable
     @Override
     public User selectByPrimaryKey(Long id) {
         if(id == null || id.intValue() <= 0){

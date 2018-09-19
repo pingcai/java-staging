@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       default-autowire="byName"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <context:property-placeholder location="classpath:env.properties,classpath:app.properties"/>
+
+    <!--proxy-target-class 是否基于类进行代理, false(默认)表示可以使用在接口和类上-->
+    <!--mode="aspectj" 基于类代理, 使用在接口上业务无效-->
+    <cache:annotation-driven/>
+
+    <!-- 定义CacheManager-->
+        <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+            <property name="cacheManager" ref="ehcache"/>
+        </bean>
+        <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+            <property name="configLocation" value="classpath:ehcache.xml"/>
+            <property name="shared" value="true"/>
+        </bean>
+
+</beans>

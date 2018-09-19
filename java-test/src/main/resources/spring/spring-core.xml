@@ -8,6 +8,7 @@
     <context:property-placeholder location="classpath:env.properties,classpath:app.properties"/>
 
     <import resource="classpath:spring/spring-dao.xml"/>
+    <import resource="classpath:spring/spring-cache.xml"/>
 
     <context:component-scan base-package="me.pingcai.service"/>
     <context:component-scan base-package="me.pingcai.reposiroty"/>

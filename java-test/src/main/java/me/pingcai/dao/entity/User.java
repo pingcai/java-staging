@@ -1,10 +1,11 @@
 package me.pingcai.dao.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import me.pingcai.dao.enums.UserSex;
 import me.pingcai.dao.enums.UserStatus;
 
-public class User {
+public class User implements Serializable {
     private Long id;
 
     private UserStatus status;
