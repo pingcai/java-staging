@@ -80,7 +80,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="user">
+        <!--<table tableName="user">-->
             <!-- optional   , only for mybatis3 runtime
                  自动生成的键值（identity,或者序列值）
                如果指定此元素，MBG将会生成<selectKey>元素，然后将此元素插入到SQL Map的<insert> 元素之中
@@ -127,10 +127,15 @@
                  typeHandler:
             <columnOverride column="" javaType=""    jdbcType="" typeHandler=""  delimitedColumnName="" />
             -->
+        <!--</table>-->
+        <!--<table tableName="user">
             <columnOverride column="status" javaType="me.pingcai.dao.enums.UserStatus" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
             <columnOverride column="sex" javaType="me.pingcai.dao.enums.UserSex" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
             <columnOverride column="register_ip" javaType="java.lang.Long"/>
             <columnOverride column="age" javaType="java.lang.Integer"/>
+        </table>-->
+        <table tableName="order">
+            <columnOverride column="status" javaType="me.pingcai.dao.enums.OrderStatus" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
         </table>
     </context>
 </generatorConfiguration>

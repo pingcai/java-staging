@@ -3,24 +3,28 @@ package me.pingcai.service.impl;
 import me.pingcai.dao.entity.User;
 import me.pingcai.enums.HttpError;
 import me.pingcai.exception.ApiException;
+import me.pingcai.reposiroty.OrderRepository;
 import me.pingcai.reposiroty.UserRepository;
-import me.pingcai.service.UserService;
+import me.pingcai.service.DomainService;
 import me.pingcai.util.IpUtils;
 import me.pingcai.vo.UserVo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class DomainServiceImpl implements DomainService {
 
-    @Resource
+    @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     @Override
-    public User selectByPrimaryKey(Long id) {
+    public User selectUserByPrimaryKey(Long id) {
         if(id == null || id.intValue() <= 0){
             return null;
         }
@@ -28,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long insertIfNotExist(UserVo user){
+    public Long insertUserIfNotExist(UserVo user){
         User dbUser = userRepository.selectByName(user.getName());
         if(dbUser != null){
             throw ApiException.newInstance(HttpError.EXIST);
@@ -39,5 +43,7 @@ public class UserServiceImpl implements UserService {
         userRepository.insert(dbUser);
         return dbUser.getId();
     }
+
+
 
 }

@@ -21,11 +21,7 @@ JAVA WEB 开发脚手架，集成常见的组件
 
 ### 数据库
 
-```
-mysql -e 'CREATE DATABASE java_staging DEFAULT CHARSET utf8mb4;USE java_staging; \
-CREATE TABLE user(id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,status TINYINT UNSIGNED NOT NULL,name VARCHAR(32) NOT NULL,sex TINYINT UNSIGNED NOT NULL,age TINYINT UNSIGNED NOT NULL,birthday DATETIME DEFAULT NOW(), comment VARCHAR(255) DEFAULT '', register_ip INT UNSIGNED NOT NULL)
-' -h localhost -uroot -p
-```
+导入`java_staging.sql
 
 ### 测试
 

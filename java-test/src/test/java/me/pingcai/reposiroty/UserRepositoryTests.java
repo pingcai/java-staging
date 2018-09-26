@@ -1,6 +1,7 @@
-package me.pingcai;
+package me.pingcai.reposiroty;
 
 import lombok.extern.slf4j.Slf4j;
+import me.pingcai.ApplicationContextTests;
 import me.pingcai.dao.entity.User;
 import me.pingcai.dao.enums.UserSex;
 import me.pingcai.dao.enums.UserStatus;
@@ -20,7 +21,7 @@ import java.util.concurrent.CountDownLatch;
  * @since 2018/9/2 21:54
  */
 @Slf4j
-public class UserTests extends ApplicationContextTests {
+public class UserRepositoryTests extends ApplicationContextTests {
 
     @Resource
     private UserRepository userRepository;

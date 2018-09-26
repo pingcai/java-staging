@@ -4,12 +4,11 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import me.pingcai.dao.entity.User;
 import me.pingcai.enums.HttpError;
-import me.pingcai.service.UserService;
+import me.pingcai.service.DomainService;
 import me.pingcai.util.IpUtils;
 import me.pingcai.vo.ResponseFactory;
 import me.pingcai.vo.UserVo;
 import org.springframework.beans.BeanUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,12 +30,12 @@ import java.util.Objects;
 public class UserController {
 
     @Resource
-    private UserService userService;
+    private DomainService domainService;
 
     @RequestMapping(method = RequestMethod.POST)
     public Object insert(@Validated UserVo user, HttpServletRequest request) {
         user.setRegisterIp(IpUtils.getIp(request));
-        Long id = userService.insertIfNotExist(user);
+        Long id = domainService.insertUserIfNotExist(user);
         if(id > 0){
             Map<String,Long> data = Maps.newHashMap();
             data.put("id",id);
@@ -48,7 +47,7 @@ public class UserController {
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public Object get(@PathVariable("id") Long id) {
-        User user = userService.selectByPrimaryKey(id);
+        User user = domainService.selectUserByPrimaryKey(id);
         UserVo res = null;
         if(Objects.nonNull(user)){
             res = new UserVo();
