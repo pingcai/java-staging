@@ -1,18 +1,14 @@
 package me.pingcai;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Maps;
 import lombok.Data;
-import me.pingcai.util.JsonUtils;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -40,29 +36,71 @@ public class AppTests {
     }
 
     @Test
-    public void testJson() throws JsonProcessingException {
-        AppTests tests = new AppTests();
-        tests.setName("tom");
-        tests.setMap(Maps.newHashMap());
-        tests.getMap().put("test", "test");
-        tests.getMap().put("test2", "test2");
-        tests.getMap().put("test2", Arrays.asList("abc", "dce"));
-        tests.getMap().put("test3", 2);
-        tests.setList(Arrays.asList("adb", 234, false));
+    public void testJson() throws JsonProcessingException, UnsupportedEncodingException {
+        String str = "中";
 
-        ObjectMapper mapper = JsonUtils.getInstance(true);
+        // \xF0\xA7\x9D\x81\xE6\x98
 
-        String res = mapper.writeValueAsString(tests);
+        System.out.println(str.getBytes());
 
-        System.out.println(res);
+        long decimal = nScale2Decimal("\\xF0\\xA7\\x9D\\x81\\xE6\\x98", 16);
 
-        AppTests test2 = JsonUtils.json2ObjectWithTypeReference(res, new TypeReference<AppTests>() {
-            @Override
-            public int compareTo(TypeReference<AppTests> o) {
-                return super.compareTo(o);
-            }
-        });
 
-        System.out.println(test2);
+        System.out.println(Long.toBinaryString(decimal));
     }
+
+    public static long nScale2Decimal(String number, int N) {
+        long result = 0;
+        if (null != number) {
+            char[] array = number.replace("\\x", "").toCharArray();
+            int len = array.length;
+            for (int i = len - 1; i >= 0; i--) {
+                result += char2Decimal(array[i]) * Math.pow(N, len - i - 1);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 1234567890
+     * ABCDEF
+     *
+     * @param c n进制的数
+     * @return 字符对应的十进制
+     */
+    private static byte char2Decimal(char c) {
+        byte result = 0;
+        switch (c) {
+            case 'A':
+            case 'a':
+                result = 10;
+                break;
+            case 'B':
+            case 'b':
+                result = 11;
+                break;
+            case 'C':
+            case 'c':
+                result = 12;
+                break;
+            case 'D':
+            case 'd':
+                result = 13;
+                break;
+            case 'E':
+            case 'e':
+                result = 14;
+                break;
+            case 'F':
+            case 'f':
+                result = 15;
+                break;
+            default:
+                result = (byte) (c - 48);
+                break;
+        }
+        return result;
+    }
+
+
 }

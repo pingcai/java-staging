@@ -2,6 +2,7 @@ package me.pingcai.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import me.pingcai.ApplicationContextTests;
+import me.pingcai.dao.entity.Order;
 import me.pingcai.dao.entity.User;
 import me.pingcai.service.DomainService;
 import org.junit.Test;
@@ -21,5 +22,17 @@ public class DomainServiceImplTest extends ApplicationContextTests {
     public void selectByPrimaryKey() {
         User user = domainService.selectUserByPrimaryKey(1011436L);
         log.info(user.getName());
+    }
+
+    @Test
+    public void deleteOrderAndUpdateUser() {
+
+        Order order = new Order();
+        order.setId(6L);
+
+        User user = new User();
+        user.setId(1011427L);
+
+        domainService.deleteOrderAndUpdateUser(order,user);
     }
 }

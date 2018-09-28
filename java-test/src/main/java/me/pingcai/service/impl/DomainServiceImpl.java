@@ -1,5 +1,7 @@
 package me.pingcai.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
+import me.pingcai.dao.entity.Order;
 import me.pingcai.dao.entity.User;
 import me.pingcai.enums.HttpError;
 import me.pingcai.exception.ApiException;
@@ -11,9 +13,12 @@ import me.pingcai.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
+@Slf4j
 @Service
 public class DomainServiceImpl implements DomainService {
 
@@ -44,6 +49,22 @@ public class DomainServiceImpl implements DomainService {
         return dbUser.getId();
     }
 
+    @Override
+    @Transactional
+    public boolean deleteOrderAndUpdateUser(Order order, User user) {
+        if(Objects.isNull(order) || Objects.isNull(user)){
+            return false;
+        }
+        int deleted = orderRepository.deleteByPrimaryKey(order.getId());
+        int updated = 0;
+        try {
+            updated = userRepository.freezeUser(user);
+        } catch (Exception e) {
+            userRepository.deleteByPrimaryKey(user.getId());
+            log.error("freeze user error, delete this user,  useId: {}",user.getId(),e);
+        }
+        return updated == 1 && deleted == 1;
+    }
 
 
 }
