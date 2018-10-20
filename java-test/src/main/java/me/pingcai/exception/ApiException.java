@@ -1,6 +1,6 @@
 package me.pingcai.exception;
 
-import me.pingcai.enums.HttpError;
+import me.pingcai.enums.ReturnCode;
 
 /**
  * @author huangpingcai
@@ -8,41 +8,41 @@ import me.pingcai.enums.HttpError;
  */
 public class ApiException extends RuntimeException{
 
-    HttpError error;
+    ReturnCode error;
 
-    public static ApiException newInstance(HttpError error){
+    public static ApiException newInstance(ReturnCode error){
         return new ApiException(error);
     }
 
-    public ApiException(HttpError error) {
+    public ApiException(ReturnCode error) {
         this.error = error;
     }
 
-    public ApiException(String message, HttpError error) {
+    public ApiException(String message, ReturnCode error) {
         super(message);
         this.error = error;
     }
 
-    public ApiException(String message, Throwable cause, HttpError error) {
+    public ApiException(String message, Throwable cause, ReturnCode error) {
         super(message, cause);
         this.error = error;
     }
 
-    public ApiException(Throwable cause, HttpError error) {
+    public ApiException(Throwable cause, ReturnCode error) {
         super(cause);
         this.error = error;
     }
 
-    public ApiException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace, HttpError error) {
+    public ApiException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace, ReturnCode error) {
         super(message, cause, enableSuppression, writableStackTrace);
         this.error = error;
     }
 
-    public HttpError getError() {
+    public ReturnCode getError() {
         return error;
     }
 
-    public void setError(HttpError error) {
+    public void setError(ReturnCode error) {
         this.error = error;
     }
 }

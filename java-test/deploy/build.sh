@@ -3,6 +3,8 @@
 # 可以考虑构建完成后清除源代码和Git
 
 prof=$profile
+
+# 如果不指定profile, 默认为dev
 [ ! $a ] && export prof=dev
 echo "current environment: $prof"
 

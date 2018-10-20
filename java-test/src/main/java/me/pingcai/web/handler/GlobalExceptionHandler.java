@@ -1,7 +1,7 @@
 package me.pingcai.web.handler;
 
 import lombok.extern.slf4j.Slf4j;
-import me.pingcai.enums.HttpError;
+import me.pingcai.enums.ReturnCode;
 import me.pingcai.exception.ApiException;
 import me.pingcai.vo.Response;
 import me.pingcai.vo.ResponseFactory;
@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Throwable.class)
     public Object throwable(Throwable throwable) {
         log.error("internal exception : ", throwable);
-        return ResponseFactory.build(HttpError.ERROR);
+        return ResponseFactory.build(ReturnCode.ERROR);
     }
 
     @ExceptionHandler(value = ApiException.class)
@@ -33,12 +33,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     public Object methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         String msg = "无法将参数 " + e.getName() + " 设置为 " + e.getValue();
-        return ResponseFactory.build(HttpError.INVALID_PARAM, msg);
+        return ResponseFactory.build(ReturnCode.INVALID_PARAM, msg);
     }
 
     @ExceptionHandler
     public Object bindException(BindException bindException) {
-        Response resp = ResponseFactory.build(HttpError.INVALID_PARAM);
+        Response resp = ResponseFactory.build(ReturnCode.INVALID_PARAM);
         String msg = bindException.getAllErrors().get(0).getDefaultMessage();
         resp.setMessage(msg);
         return resp;

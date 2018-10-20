@@ -3,7 +3,7 @@ package me.pingcai.enums;
 /**
  * create by 黄平财 at 2018/1/7 00:40
  */
-public enum HttpError{
+public enum ReturnCode {
 
     SUCCESS(1,"操作成功"),
     FAIL(2,"操作失败"),
@@ -17,7 +17,7 @@ public enum HttpError{
     private int code;
     private String message;
 
-    HttpError(int code, String message) {
+    ReturnCode(int code, String message) {
         this.code = code;
         this.message = message;
     }

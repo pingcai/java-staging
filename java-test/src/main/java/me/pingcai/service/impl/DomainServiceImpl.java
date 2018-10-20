@@ -1,7 +1,7 @@
 package me.pingcai.service.impl;
 
 import me.pingcai.dao.entity.User;
-import me.pingcai.enums.HttpError;
+import me.pingcai.enums.ReturnCode;
 import me.pingcai.exception.ApiException;
 import me.pingcai.reposiroty.OrderRepository;
 import me.pingcai.reposiroty.UserRepository;
@@ -11,8 +11,6 @@ import me.pingcai.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 @Service
 public class DomainServiceImpl implements DomainService {
@@ -35,7 +33,7 @@ public class DomainServiceImpl implements DomainService {
     public Long insertUserIfNotExist(UserVo user){
         User dbUser = userRepository.selectByName(user.getName());
         if(dbUser != null){
-            throw ApiException.newInstance(HttpError.EXIST);
+            throw ApiException.newInstance(ReturnCode.EXIST);
         }
         dbUser = new User();
         BeanUtils.copyProperties(user,dbUser);

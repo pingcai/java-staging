@@ -21,7 +21,7 @@ JAVA WEB 开发脚手架，集成常见的组件
 
 ### 数据库
 
-导入`java_staging.sql
+导入`java_staging.sql`
 
 ### 测试
 
@@ -34,9 +34,9 @@ run/debug JettyBoot
 
 ### 配置
 
-1. 设置环境(dev/test/staging/prod)
+1. 设置环境变量(dev/test/staging/prod)
 
-    export profile='pord'
+    export profile='pord' // 声明当前环境为生产环境
 
 2. 设置运行日志
 

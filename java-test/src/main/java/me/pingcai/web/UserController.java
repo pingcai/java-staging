@@ -3,7 +3,7 @@ package me.pingcai.web;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import me.pingcai.dao.entity.User;
-import me.pingcai.enums.HttpError;
+import me.pingcai.enums.ReturnCode;
 import me.pingcai.service.DomainService;
 import me.pingcai.util.IpUtils;
 import me.pingcai.vo.ResponseFactory;
@@ -42,7 +42,7 @@ public class UserController {
             log.info("add user success !");
             return ResponseFactory.buildSuccess(data);
         }
-        return ResponseFactory.build(HttpError.FAIL);
+        return ResponseFactory.build(ReturnCode.FAIL);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
@@ -54,7 +54,7 @@ public class UserController {
             BeanUtils.copyProperties(user,res);
             res.setRegisterIp(IpUtils.long2Ip(user.getRegisterIp()));
         }
-        return Objects.isNull(res) ? ResponseFactory.build(HttpError.NOT_EXIST) : ResponseFactory.buildSuccess(res);
+        return Objects.isNull(res) ? ResponseFactory.build(ReturnCode.NOT_EXIST) : ResponseFactory.buildSuccess(res);
     }
 
 
