@@ -65,7 +65,7 @@ public class JettyBoot {
         context.setWar(config.getWebDir());
         server.setHandler(context);
 
-        // 支持JSP
+        // 3.Jsp
         Configuration.ClassList classList = Configuration.ClassList
                 .setServerDefault(server);
         classList.addBefore(
@@ -75,11 +75,11 @@ public class JettyBoot {
                 "org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
                 ".*/[^/]*servlet-api-[^/]*\\.jar$|.*/javax.servlet.jsp.jstl-.*\\.jar$|.*/[^/]*taglibs.*\\.jar$");
 
-        //4.Start the Server.
+        //5.Start the Server.
         server.start();
         log.info("jetty is running");
 
-        //5.Wait on the server or do something else with your thread.
+        //6.Wait on the server or do something else with your thread.
         server.join();
     }
 

@@ -15,24 +15,9 @@ import java.util.Objects;
  */
 public final class JsonUtils {
 
-    private static ObjectMapper MAPPER;
-
-    private static ObjectMapper MAPPER_WITH_ROOT;
+    private static ObjectMapper MAPPER = getInstance(true);
 
     private static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd hh:mm:ss";
-
-    static {
-        if (Objects.isNull(MAPPER)) {
-            synchronized (JsonUtils.class) {
-                if (Objects.isNull(MAPPER)) {
-                    MAPPER = newInstance();
-                    MAPPER_WITH_ROOT = newInstance();
-                    MAPPER_WITH_ROOT.enable(SerializationFeature.WRAP_ROOT_VALUE);
-                    MAPPER_WITH_ROOT.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
-                }
-            }
-        }
-    }
 
     private JsonUtils() {
     }
@@ -64,23 +49,6 @@ public final class JsonUtils {
     }
 
     /**
-     * 对象转json字符串，类名做json的key
-     * @param object
-     * @return
-     */
-    public static String object2JsonWithRoot(Object object) {
-        String res = null;
-        if (Objects.nonNull(object)) {
-            try {
-                res = MAPPER_WITH_ROOT.writeValueAsString(object);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return res;
-    }
-
-    /**
      * 字符串转对象
      * @param json
      * @param clazz
@@ -91,23 +59,6 @@ public final class JsonUtils {
         T res = null;
         try {
             res = MAPPER.readValue(json, clazz);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return res;
-    }
-
-    /**
-     * 字符串转对象，json中，类名做key
-     * @param json
-     * @param clazz
-     * @param <T>
-     * @return
-     */
-    public static <T> T json2ObjectWithRoot(String json, Class<T> clazz) {
-        T res = null;
-        try {
-            res = MAPPER_WITH_ROOT.readValue(json, clazz);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

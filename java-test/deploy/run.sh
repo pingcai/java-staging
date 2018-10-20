@@ -3,8 +3,8 @@
 PWD=`pwd`
 cd ..
 
-# 控制运行日志, 可以直接观察log4j的日志, 这里直接将日志丢弃
-runlog=/dev/null
+# 控制运行日志
+runlog="/tmp/java-test.running.`date '+%Y-%m-%d-%H:%M:%S'`.log"
 echo "run log: $runlog"
 
 # 虚拟机参数
