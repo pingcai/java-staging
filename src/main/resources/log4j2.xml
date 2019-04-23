@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+
+    <Properties>
+        <property name="log4j2.log.path">/tmp</property>
+        <property name="app.name">java-staging</property>
+        <property name="commonLayoutPattern">[%d{yyyy-MM-dd HH:mm:ss}] [%p] %l: %m%n</property>
+        <property name="infoFileName">${log4j2.log.path}/${app.name}.log</property>
+        <property name="errorFileName">${log4j2.log.path}/${app.name}.error.log</property>
+        <property name="infoFilePattern">${app.name}.log.%d{yyyy-MM-dd}</property>
+        <property name="errorFilePattern">${app.name}.error.log.%d{yyyy-MM-dd}</property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${commonLayoutPattern}"/>
+        </Console>
+        <!--INFO-->
+        <RollingRandomAccessFile name="info" fileName="${infoFileName}"
+                                 filePattern="${infoFilePattern}">
+            <!--运行日志-->
+            <!-- http://logging.apache.org/log4j/2.x/manual/filters.html#ThresholdFilter -->
+            <Filters>
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <!-- http://logging.apache.org/log4j/2.x/manual/layouts.html -->
+            <PatternLayout>
+                <Charset>UTF-8</Charset>
+                <Pattern>${commonLayoutPattern}</Pattern>
+            </PatternLayout>
+            <!--根据时间保存日志文件-->
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!--同名日志覆盖策略-->
+            <DefaultRolloverStrategy max="60"/>
+        </RollingRandomAccessFile>
+        <!--ERROR 单独文件-->
+        <RollingRandomAccessFile name="error" fileName="${errorFileName}"
+                                 filePattern="${errorFilePattern}">
+            <!--只接受ERROR日志-->
+            <!-- http://logging.apache.org/log4j/2.x/manual/filters.html#ThresholdFilter -->
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- http://logging.apache.org/log4j/2.x/manual/layouts.html -->
+            <PatternLayout>
+                <Charset>UTF-8</Charset>
+                <Pattern>${commonLayoutPattern}</Pattern>
+            </PatternLayout>
+            <!--根据时间保存文件-->
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!--日志覆盖策略-->
+            <DefaultRolloverStrategy max="60"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <loggers>
+        <root level="info">
+            <!--线上不能使用console-->
+            <appender-ref ref="console"/>
+            <appender-ref ref="info"/>
+            <appender-ref ref="error"/>
+        </root>
+    </loggers>
+</configuration>

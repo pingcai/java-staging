@@ -51,10 +51,7 @@ CREATE TABLE `user` (
   `register_ip` int(10) unsigned NOT NULL,
   `add_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `idx_name_add_time` (`name`,`add_time`),
-  KEY `idx_register_ip_name` (`register_ip`,`name`),
-  KEY `idx_name_register_ip_birthday` (`name`,`register_ip`,`birthday`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
