@@ -1,0 +1,35 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: java-staging
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/java_staging?auto_commit=false&charset=UTF8&zeroDateTimeBehavior=convertToNull&loginTimeout=100&lockTimeout=5000&socketTimeout=5000&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis:
+    type-handlers-package: me.pingcai.dao.handler
+    type-aliases-package: me.pingcai.dao.entity
+    configuration:
+        cache-enabled: false
+        lazy-loading-enabled: false
+        aggressive-lazy-loading: false
+        use-generated-keys: true
+    mapper-locations: classpath:mybatis/mapper/*.xml
+
+---
+spring:
+  profiles: dev
+
+---
+spring:
+  profiles: prod

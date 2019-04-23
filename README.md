@@ -2,8 +2,7 @@
 
 JAVA WEB 开发脚手架，集成常见的组件
 
-- Jetty
-- Spring
+- Spring Boot
 - Mybatis
 - Slf4j + Log4j2
 
@@ -17,7 +16,7 @@ JAVA WEB 开发脚手架，集成常见的组件
 
 ### 修改配置
 
-    java-staging/java-test/src/main/profile/dev/env.properties
+    src/main/resources/application.yml
 
 ### 数据库
 
@@ -26,7 +25,7 @@ JAVA WEB 开发脚手架，集成常见的组件
 ### 测试
 
 ```    
-run/debug JettyBoot
+run/debug Application.java
 
 ```
 
@@ -35,24 +34,25 @@ run/debug JettyBoot
 ### 配置
 
 1. 设置环境变量(dev/test/staging/prod)
-
-    export profile='pord' // 声明当前环境为生产环境
-
+```
+export SPRING_PROFILES_ACTIVE='pord' // 声明当前环境为生产环境
+```
 2. 设置运行日志
+```
+src/main/resources/log4j2.xml
 
-    env.properties -> log4j2.log.path
+log.path=日志位置
 
-3. 设置Jetty参数
-
-    含义见JettyBoot, 并修改 java-staging/java-test/deploy/build.sh
+app.name=日志名称
+```
 
 ### 构建
 
-    java-staging/java-test/deploy/build.sh
+    deploy/build.sh
 
 ### 运行
 
-    java-staging/java-test/deploy/run.sh
+    deploy/run.sh
 
 ## 其它
 禁用ipv6

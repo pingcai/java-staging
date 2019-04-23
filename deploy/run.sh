@@ -4,8 +4,14 @@ PWD=`pwd`
 cd ..
 
 # 控制运行日志
-runlog="/tmp/java-test.running.`date '+%Y-%m-%d-%H:%M:%S'`.log"
+# runlog="/tmp/java-staging.running.`date '+%Y-%m-%d-%H:%M:%S'`.log"
+runlog="/dev/null"
 echo "run log: $runlog"
+
+# 默认profile
+if [ -z $SPRING_PROFILES_ACTIVE ]; then
+    SPRING_PROFILES_ACTIVE="dev"
+fi
 
 # 虚拟机参数
 JAVA_OPTS="
@@ -28,13 +34,10 @@ JAVA_OPTS="
 -XX:-OmitStackTraceInFastThrow
 -XX:+HeapDumpOnOutOfMemoryError
 -Dfile.encoding=UTF-8
--Djava.net.preferIPv4Stack=true"
+-Djava.net.preferIPv4Stack=true
+-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}"
 echo "JAVA_OPTS: $JAVA_OPTS"
 
-# 主函数参数
-MAIN_CLASS_ARGS="port=8080"
-echo "main class args: $MAIN_CLASS_ARGS"
-
-exec nohup java $JAVA_OPTS -jar target/java-test.jar $MAIN_CLASS_ARGS >> $runlog 2>&1 &
+exec nohup java $JAVA_OPTS -jar target/java-staging.jar >> $runlog 2>&1 &
 
 cd $PWD
