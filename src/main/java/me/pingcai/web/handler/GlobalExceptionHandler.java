@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @ControllerAdvice
 @ResponseBody
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Throwable.class)
