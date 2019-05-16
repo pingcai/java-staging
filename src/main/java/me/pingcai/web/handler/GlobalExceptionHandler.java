@@ -3,9 +3,11 @@ package me.pingcai.web.handler;
 import lombok.extern.slf4j.Slf4j;
 import me.pingcai.enums.ReturnCode;
 import me.pingcai.exception.ApiException;
-import me.pingcai.vo.HttpResponse;
-import me.pingcai.vo.HttpResponseFactory;
+import me.pingcai.domain.HttpResponse;
+import me.pingcai.domain.HttpResponseFactory;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,5 +47,15 @@ public class GlobalExceptionHandler {
         List<String> msg = bindException.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
         resp.setData(msg);
         return resp;
+    }
+
+    @ExceptionHandler
+    public Object httpMessageNotReadableException(HttpMessageNotReadableException e){
+        return HttpResponseFactory.build(ReturnCode.INVALID_PARAM);
+    }
+
+    @ExceptionHandler
+    public Object httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e){
+        return HttpResponseFactory.build(ReturnCode.INVALID_PARAM);
     }
 }

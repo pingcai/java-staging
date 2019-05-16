@@ -1,5 +1,6 @@
-package me.pingcai.vo;
+package me.pingcai.domain;
 
+import lombok.Data;
 import me.pingcai.enums.ReturnCode;
 
 import java.io.Serializable;
@@ -7,10 +8,13 @@ import java.io.Serializable;
 /**
  * create by 黄平财 at 2018/1/7 00:45
  */
+@Data
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class HttpResponse<T> implements Serializable{
 
     private Status status;
+
+    private int code;
 
     private String msg;
 
@@ -29,6 +33,7 @@ public class HttpResponse<T> implements Serializable{
     public static <T> HttpResponse newInstance(ReturnCode returnCode){
         HttpResponse response = new HttpResponse<T>();
         response.setStatus(returnCode.getStatus());
+        response.setCode(returnCode.getCode());
         response.setMsg(returnCode.getMsg());
         return response;
     }
@@ -38,29 +43,4 @@ public class HttpResponse<T> implements Serializable{
         response.setData(t);
         return response;
     }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
 }

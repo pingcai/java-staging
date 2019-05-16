@@ -7,6 +7,9 @@ import me.pingcai.dao.enums.UserStatus;
 import me.pingcai.util.IpUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -19,6 +22,8 @@ import java.util.concurrent.CountDownLatch;
  * @since 2018/9/2 21:54
  */
 @Slf4j
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class UserRepositoryTests {
 
     @Resource
@@ -32,15 +37,18 @@ public class UserRepositoryTests {
         for (int i = 0; i < count; i++) {
             new Thread(() -> {
                 try {
-                    for (int i1 = 0; i1 < 60000; i1++) {
+                    for (int j = 0; j < 60000; j++) {
                         User user = new User();
                         user.setName(StringUtils.substring(UUID.randomUUID().toString(), 0, 31));
-                        user.setAge(i1 % 127);
+                        user.setAge(j % 127);
                         user.setBirthday(new Date());
                         user.setSex(random.nextBoolean() ? UserSex.MALE : UserSex.FEMALE);
                         user.setStatus(random.nextBoolean() ? UserStatus.NORMAL : UserStatus.NONACTIVATED);
-                        user.setRegisterIp(i1 % 1000 == 0 ? IpUtils.ip2Long("127.0.0.1") : buildIp(i1));
-                        user.setComment(String.valueOf(i1));
+                        user.setRegisterIp(j % 1000 == 0 ? IpUtils.ip2Long("127.0.0.1") : buildIp(j));
+                        user.setComment(String.valueOf(j));
+                        Date now  = new Date();
+                        user.setAddTime(now);
+                        user.setUpdateTime(now);
                         userRepository.insert(user);
                     }
                 } catch (Exception e) {

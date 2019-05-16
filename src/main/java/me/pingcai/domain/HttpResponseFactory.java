@@ -1,4 +1,4 @@
-package me.pingcai.vo;
+package me.pingcai.domain;
 
 
 import me.pingcai.enums.ReturnCode;

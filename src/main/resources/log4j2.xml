@@ -62,5 +62,11 @@
             <appender-ref ref="info"/>
             <appender-ref ref="error"/>
         </root>
+
+
+<!--        <logger name="me.pingcai.dao.mapper.UserMapper" level="debug" additivity="false">
+            <appender-ref ref="console"/>
+        </logger>-->
+
     </loggers>
 </configuration>

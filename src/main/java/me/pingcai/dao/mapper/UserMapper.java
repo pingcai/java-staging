@@ -1,6 +1,7 @@
 package me.pingcai.dao.mapper;
 
 import java.util.List;
+
 import me.pingcai.dao.entity.User;
 import me.pingcai.dao.entity.UserExample;
 import org.apache.ibatis.annotations.Param;

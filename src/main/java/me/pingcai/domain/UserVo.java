@@ -1,13 +1,10 @@
-package me.pingcai.vo;
+package me.pingcai.domain;
 
 import me.pingcai.dao.enums.UserSex;
 import me.pingcai.dao.enums.UserStatus;
 import me.pingcai.web.validator.NameCheck;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;

@@ -1,13 +1,14 @@
 package me.pingcai.web;
 
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import me.pingcai.dao.entity.User;
 import me.pingcai.enums.ReturnCode;
 import me.pingcai.service.DomainService;
 import me.pingcai.util.IpUtils;
-import me.pingcai.vo.HttpResponseFactory;
-import me.pingcai.vo.UserVo;
+import me.pingcai.domain.HttpResponseFactory;
+import me.pingcai.domain.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,5 +59,9 @@ public class UserController {
         return Objects.isNull(res) ? HttpResponseFactory.build(ReturnCode.USER_NOT_EXIST) : HttpResponseFactory.buildSuccess(res);
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public Object list(PageInfo<User> pageInfo) {
+        return domainService.selectUserByPage(pageInfo);
+    }
 
 }

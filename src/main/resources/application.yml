@@ -15,16 +15,23 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+    default-property-inclusion: non_null
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: false
+  params: count=countSql
 
 mybatis:
-    type-handlers-package: me.pingcai.dao.handler
-    type-aliases-package: me.pingcai.dao.entity
-    configuration:
-        cache-enabled: false
-        lazy-loading-enabled: false
-        aggressive-lazy-loading: false
-        use-generated-keys: true
-    mapper-locations: classpath:mybatis/mapper/*.xml
+  type-handlers-package: me.pingcai.dao.handler
+  type-aliases-package: me.pingcai.dao.entity
+  configuration:
+    cache-enabled: false
+    lazy-loading-enabled: false
+    aggressive-lazy-loading: false
+    use-generated-keys: true
+  mapper-locations: classpath:mybatis/mapper/*.xml
 
 ---
 spring:

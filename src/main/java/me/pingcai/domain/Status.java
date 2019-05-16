@@ -1,4 +1,4 @@
-package me.pingcai.vo;
+package me.pingcai.domain;
 
 /**
  * @author huangpingcai

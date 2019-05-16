@@ -1,5 +1,6 @@
 package me.pingcai.reposiroty;
 
+import com.github.pagehelper.PageHelper;
 import me.pingcai.dao.entity.User;
 import me.pingcai.dao.entity.UserExample;
 import me.pingcai.dao.mapper.UserMapper;
@@ -7,6 +8,7 @@ import me.pingcai.util.Lister;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Repository
 public class UserRepository {
@@ -27,5 +29,12 @@ public class UserRepository {
 
     public User selectByPrimaryKey(Long id) {
         return userMapper.selectByPrimaryKey(id);
+    }
+
+
+    public List<User> selectUserByPage(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize,false);
+        UserExample example = new UserExample();
+        return userMapper.selectByExample(example);
     }
 }
