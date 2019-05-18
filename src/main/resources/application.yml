@@ -12,6 +12,16 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: springHikariCP
+      minimum-idle: 10
+      maximum-pool-size: 10
+      auto-commit: true
+      # 小于数据库连接超时时间（连接就是不断创建、销毁、再创建）
+      # MySQL：show variables like '%timeout%'
+      # 分布式数据库：...
+      max-lifetime: 1800000
+      connection-timeout: 3000
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

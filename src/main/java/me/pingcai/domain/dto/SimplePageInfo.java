@@ -1,6 +1,7 @@
 package me.pingcai.domain.dto;
 
 import com.github.pagehelper.Page;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -10,6 +11,7 @@ import java.util.List;
  * @author huangpingcai
  * @since 2019-05-16 20:16
  */
+@Data
 public class SimplePageInfo<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,73 +64,5 @@ public class SimplePageInfo<T> implements Serializable {
             this.startRow = 0;
             this.endRow = list.size() > 0 ? list.size() - 1 : 0;
         }
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public int getStartRow() {
-        return startRow;
-    }
-
-    public void setStartRow(int startRow) {
-        this.startRow = startRow;
-    }
-
-    public int getEndRow() {
-        return endRow;
-    }
-
-    public void setEndRow(int endRow) {
-        this.endRow = endRow;
-    }
-
-    public long getTotal() {
-        return total;
-    }
-
-    public void setTotal(long total) {
-        this.total = total;
-    }
-
-    public int getPages() {
-        return pages;
-    }
-
-    public void setPages(int pages) {
-        this.pages = pages;
-    }
-
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
     }
 }
