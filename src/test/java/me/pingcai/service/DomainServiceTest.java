@@ -1,7 +1,7 @@
 package me.pingcai.service;
 
 import lombok.extern.slf4j.Slf4j;
-import me.pingcai.dao.entity.User;
+import me.pingcai.domain.entity.User;
 import me.pingcai.reposiroty.UserRepository;
 import org.junit.Before;
 import org.junit.Test;

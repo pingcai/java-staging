@@ -1,4 +1,4 @@
-package me.pingcai.dao.enums;
+package me.pingcai.domain.enums;
 
 /**
  * 整形(TINYINT / INT)都应用Integer接收, bit可以用Byte接收

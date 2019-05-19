@@ -1,6 +1,6 @@
 package me.pingcai.dao.handler;
 
-import me.pingcai.dao.enums.DbEnum;
+import me.pingcai.domain.enums.DbEnum;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 

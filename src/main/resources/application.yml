@@ -35,12 +35,11 @@ pagehelper:
 
 mybatis:
   type-handlers-package: me.pingcai.dao.handler
-  type-aliases-package: me.pingcai.dao.entity
+  type-aliases-package: me.pingcai.domain.entity
   configuration:
     cache-enabled: false
     lazy-loading-enabled: false
     aggressive-lazy-loading: false
-    use-generated-keys: true
   mapper-locations: classpath:mybatis/mapper/*.xml
 
 ---

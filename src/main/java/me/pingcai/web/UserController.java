@@ -3,23 +3,21 @@ package me.pingcai.web;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
-import me.pingcai.dao.entity.User;
+import me.pingcai.domain.entity.User;
+import me.pingcai.domain.dto.HttpResponse;
+import me.pingcai.domain.vo.UserVo;
 import me.pingcai.enums.ReturnCode;
 import me.pingcai.service.DomainService;
-import me.pingcai.util.IpUtils;
-import me.pingcai.domain.HttpResponseFactory;
-import me.pingcai.domain.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author huangpingcai
@@ -34,29 +32,24 @@ public class UserController {
     private DomainService domainService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Object insert(@Validated UserVo user, HttpServletRequest request) {
-        user.setRegisterIp(IpUtils.getIp(request));
+    public Object create(@Validated @RequestBody UserVo user) {
         Long id = domainService.insertUserIfNotExist(user);
-        if(id > 0){
-            Map<String,Long> data = Maps.newHashMap();
-            data.put("id",id);
-            log.info("add user success !");
-            return HttpResponseFactory.buildSuccess(data);
+        if (id > 0) {
+            return HttpResponse.buildSuccess(Maps.immutableEntry("id", id));
         }
-        return HttpResponseFactory.build(ReturnCode.FAIL);
+        return HttpResponse.buildError(ReturnCode.INTERNAL_ERROR);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public Object get(@PathVariable("id") Long id) {
-        User user = domainService.selectUserByPrimaryKey(id);
-        UserVo res = null;
-        if(Objects.nonNull(user)){
-            res = new UserVo();
-            BeanUtils.copyProperties(user,res);
-            res.setRegisterIp(IpUtils.long2Ip(user.getRegisterIp()));
-        }
-        log.info("打日志");
-        return Objects.isNull(res) ? HttpResponseFactory.build(ReturnCode.USER_NOT_EXIST) : HttpResponseFactory.buildSuccess(res);
+        return Optional.ofNullable(domainService.selectUserByPrimaryKey(id))
+                .map(user -> {
+                    UserVo res = new UserVo();
+                    BeanUtils.copyProperties(user, res);
+                    res.setPassword(null);
+                    return HttpResponse.buildSuccess(res);
+                })
+                .orElse(HttpResponse.buildError(ReturnCode.USER_NOT_EXIST));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

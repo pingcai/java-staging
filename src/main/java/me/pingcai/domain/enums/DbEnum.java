@@ -1,4 +1,4 @@
-package me.pingcai.dao.enums;
+package me.pingcai.domain.enums;
 
 /**
  * @author huangpingcai

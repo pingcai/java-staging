@@ -1,10 +1,10 @@
 package me.pingcai.reposiroty;
 
 import com.github.pagehelper.PageHelper;
-import me.pingcai.dao.entity.User;
-import me.pingcai.dao.entity.UserExample;
+import me.pingcai.domain.entity.User;
+import me.pingcai.domain.entity.UserExample;
 import me.pingcai.dao.mapper.UserMapper;
-import me.pingcai.util.Lister;
+import me.pingcai.util.ListUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -19,7 +19,7 @@ public class UserRepository {
     public User selectByName(String name) {
         UserExample example = new UserExample();
         example.or().andNameEqualTo(name);
-        return Lister.firstOfList(userMapper.selectByExample(example));
+        return ListUtils.firstOfList(userMapper.selectByExample(example));
     }
 
 

@@ -44,15 +44,21 @@ CREATE TABLE `user` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `status` tinyint(3) unsigned NOT NULL,
   `name` varchar(32) NOT NULL,
+  `display_name` varchar(16) NOT NULL,
+  `profile_picture` varchar(64) NOT NULL DEFAULT '',
+  `phone` char(11) NOT NULL,
+  `email` varchar(32) NOT NULL DEFAULT '',
+  `password` char(64) NOT NULL DEFAULT '',
+  `password_salt` char(64) NOT NULL DEFAULT '',
   `sex` tinyint(3) unsigned NOT NULL,
   `age` tinyint(3) unsigned NOT NULL,
-  `birthday` datetime DEFAULT CURRENT_TIMESTAMP,
-  `comment` varchar(255) DEFAULT '',
-  `register_ip` int(10) unsigned NOT NULL,
-  `add_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `birthday` date DEFAULT '1970-01-01',
+  `introduction` varchar(32) DEFAULT '',
+  `add_time` datetime(3) NOT NULL DEFAULT '1970-01-01 00:00:00.000',
+  `update_time` datetime(3) NOT NULL DEFAULT '1970-01-01 00:00:00.000',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idex_name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=10291 DEFAULT CHARSET=utf8mb4;
 
 
 

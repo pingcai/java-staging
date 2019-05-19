@@ -1,8 +1,8 @@
 package me.pingcai.web;
 
 import lombok.extern.slf4j.Slf4j;
-import me.pingcai.dao.entity.User;
-import me.pingcai.dao.enums.UserStatus;
+import me.pingcai.domain.entity.User;
+import me.pingcai.domain.enums.UserStatus;
 import me.pingcai.util.JsonUtils;
 import org.junit.Before;
 import org.junit.Test;

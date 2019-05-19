@@ -35,7 +35,7 @@
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径
         -->
-        <javaModelGenerator targetPackage="me.pingcai.dao.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="me.pingcai.domain.entity" targetProject="src/main/java">
             <!-- 是否对model添加 构造函数 -->
             <property name="constructorBased" value="true"/>
 
@@ -132,8 +132,8 @@
             -->
         <!--</table>-->
         <table tableName="user">
-            <columnOverride column="status" javaType="me.pingcai.dao.enums.UserStatus" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
-            <columnOverride column="sex" javaType="me.pingcai.dao.enums.UserSex" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
+            <columnOverride column="status" javaType="me.pingcai.domain.enums.UserStatus" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
+            <columnOverride column="sex" javaType="me.pingcai.domain.enums.UserSex" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler"/>
             <columnOverride column="register_ip" javaType="java.lang.Long"/>
             <columnOverride column="age" javaType="java.lang.Integer"/>
         </table>

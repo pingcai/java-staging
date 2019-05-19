@@ -1,4 +1,4 @@
-package me.pingcai.domain;
+package me.pingcai.domain.dto;
 
 /**
  * @author huangpingcai

@@ -1,10 +1,9 @@
 package me.pingcai.reposiroty;
 
 import lombok.extern.slf4j.Slf4j;
-import me.pingcai.dao.entity.User;
-import me.pingcai.dao.enums.UserSex;
-import me.pingcai.dao.enums.UserStatus;
-import me.pingcai.util.IpUtils;
+import me.pingcai.domain.entity.User;
+import me.pingcai.domain.enums.UserSex;
+import me.pingcai.domain.enums.UserStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,8 +43,7 @@ public class UserRepositoryTests {
                         user.setBirthday(new Date());
                         user.setSex(random.nextBoolean() ? UserSex.MALE : UserSex.FEMALE);
                         user.setStatus(random.nextBoolean() ? UserStatus.NORMAL : UserStatus.NONACTIVATED);
-                        user.setRegisterIp(j % 1000 == 0 ? IpUtils.ip2Long("127.0.0.1") : buildIp(j));
-                        user.setComment(String.valueOf(j));
+                        user.setIntroduction(String.valueOf(j));
                         Date now  = new Date();
                         user.setAddTime(now);
                         user.setUpdateTime(now);
@@ -60,22 +58,5 @@ public class UserRepositoryTests {
             }).start();
         }
         latch.await();
-    }
-
-    @Test
-    public void testIp() {
-        System.out.println(IpUtils.ip2Long("127.0.0.1"));
-    }
-
-    private Long buildIp(int i) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(i % 255 + 1)
-                .append(".")
-                .append(i % 127)
-                .append(".")
-                .append(i % 192)
-                .append(".")
-                .append(i % 182);
-        return IpUtils.ip2Long(sb.toString());
     }
 }

@@ -1,13 +1,16 @@
 package me.pingcai.web.validator;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 
 import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.util.regex.Pattern;
 
 /**
@@ -20,7 +23,7 @@ import java.util.regex.Pattern;
 @Documented
 public @interface NameCheck {
 
-    String message() default "输入的姓名有误";
+    String message() default "姓名不合法";
 
     int max() default 12;
 
@@ -38,18 +41,27 @@ class NameValidator implements ConstraintValidator<NameCheck, String> {
 
     private NameCheck nameCheck;
 
+    private Pattern pattern;
+
     @Override
-    public void initialize(NameCheck constraintAnnotation) {
-        // 初始化操作
-        nameCheck = constraintAnnotation;
+    public void initialize(NameCheck nameCheck) {
+        this.nameCheck = nameCheck;
+        if (StringUtils.isNotEmpty(nameCheck.regex())) {
+            this.pattern = Pattern.compile(nameCheck.regex());
+        }
     }
 
     @Override
     public boolean isValid(String name, ConstraintValidatorContext context) {
-        boolean result = true;
-        if (StringUtils.isNotBlank(nameCheck.regex())){
-            result = Pattern.matches(nameCheck.regex(),name);
+        if (name == null) {
+            return false;
         }
-        return result && name.length() >= nameCheck.min() && name.length() <= nameCheck.max();
+        if (name.length() < nameCheck.min() || name.length() > nameCheck.max()) {
+            return false;
+        }
+        if (pattern != null) {
+            return pattern.matcher(name).matches();
+        }
+        return true;
     }
 }

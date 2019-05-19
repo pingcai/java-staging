@@ -66,22 +66,6 @@ public final class JsonUtils {
         return res;
     }
 
-    /**
-     * 字符串转对象
-     * @param json
-     * @param <T>
-     * @return
-     */
-    public static <T> T json2ObjectWithTypeReference(String json, TypeReference<T> reference) {
-        T res = null;
-        try {
-            res = MAPPER.readValue(json,reference);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return res;
-    }
-
     private static ObjectMapper newInstance() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat(DEFAULT_DATETIME_PATTERN));
