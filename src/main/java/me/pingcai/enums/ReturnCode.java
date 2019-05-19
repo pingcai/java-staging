@@ -20,7 +20,8 @@ public enum ReturnCode {
       */
     INVALID_PARAM(Status.FAIL, 1000,"参数不合法"),
     USER_NOT_EXIST(Status.FAIL, 1001, "用户不存在"),
-    USER_EXIST(Status.FAIL, 10002,"用户已存在");
+    USER_EXIST(Status.FAIL, 10002,"用户已存在"),
+    NAME_PASSWORD_MISMATCH(Status.FAIL, 10003,"用户名或密码有误");
 
     private Status status;
     private int code;

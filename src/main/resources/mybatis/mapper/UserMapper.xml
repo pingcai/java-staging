@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.pingcai.dao.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="me.pingcai.domain.entity.User">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="status" javaType="me.pingcai.domain.enums.UserStatus" jdbcType="TINYINT" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="display_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="profile_picture" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="password_salt" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="sex" javaType="me.pingcai.domain.enums.UserSex" jdbcType="TINYINT" typeHandler="me.pingcai.dao.handler.DbEnumTypeHandler" />
+      <arg column="age" javaType="java.lang.Integer" jdbcType="TINYINT" />
+      <arg column="birthday" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="introduction" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="add_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.statusCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler} and #{criterion.secondValue,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.sexCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler} and #{criterion.secondValue,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.statusCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler} and #{criterion.secondValue,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+            <foreach collection="criteria.sexCriteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler} and #{criterion.secondValue,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, status, name, display_name, profile_picture, phone, email, password, password_salt, 
+    sex, age, birthday, introduction, add_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="me.pingcai.domain.entity.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="me.pingcai.domain.entity.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="me.pingcai.domain.entity.User" useGeneratedKeys="true" keyProperty="id">
+    insert into user (id, status, 
+      name, display_name, profile_picture, 
+      phone, email, password, password_salt, 
+      sex, age, 
+      birthday, introduction, add_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}, 
+      #{name,jdbcType=VARCHAR}, #{displayName,jdbcType=VARCHAR}, #{profilePicture,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, #{passwordSalt,jdbcType=CHAR}, 
+      #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler}, #{age,jdbcType=TINYINT}, 
+      #{birthday,jdbcType=DATE}, #{introduction,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="me.pingcai.domain.entity.User" useGeneratedKeys="true" keyProperty="id">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="displayName != null">
+        display_name,
+      </if>
+      <if test="profilePicture != null">
+        profile_picture,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="passwordSalt != null">
+        password_salt,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePicture != null">
+        #{profilePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="passwordSalt != null">
+        #{passwordSalt,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="me.pingcai.domain.entity.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displayName != null">
+        display_name = #{record.displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profilePicture != null">
+        profile_picture = #{record.profilePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=CHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=CHAR},
+      </if>
+      <if test="record.passwordSalt != null">
+        password_salt = #{record.passwordSalt,jdbcType=CHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=TINYINT},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.introduction != null">
+        introduction = #{record.introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      name = #{record.name,jdbcType=VARCHAR},
+      display_name = #{record.displayName,jdbcType=VARCHAR},
+      profile_picture = #{record.profilePicture,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=CHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=CHAR},
+      password_salt = #{record.passwordSalt,jdbcType=CHAR},
+      sex = #{record.sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      age = #{record.age,jdbcType=TINYINT},
+      birthday = #{record.birthday,jdbcType=DATE},
+      introduction = #{record.introduction,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="me.pingcai.domain.entity.User">
+    update user
+    <set>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        display_name = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePicture != null">
+        profile_picture = #{profilePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="passwordSalt != null">
+        password_salt = #{passwordSalt,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.pingcai.domain.entity.User">
+    update user
+    set status = #{status,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      name = #{name,jdbcType=VARCHAR},
+      display_name = #{displayName,jdbcType=VARCHAR},
+      profile_picture = #{profilePicture,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      password_salt = #{passwordSalt,jdbcType=CHAR},
+      sex = #{sex,jdbcType=TINYINT,typeHandler=me.pingcai.dao.handler.DbEnumTypeHandler},
+      age = #{age,jdbcType=TINYINT},
+      birthday = #{birthday,jdbcType=DATE},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

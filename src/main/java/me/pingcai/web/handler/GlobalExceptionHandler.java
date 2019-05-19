@@ -3,7 +3,8 @@ package me.pingcai.web.handler;
 import lombok.extern.slf4j.Slf4j;
 import me.pingcai.domain.dto.HttpResponse;
 import me.pingcai.enums.ReturnCode;
-import me.pingcai.exception.ApiException;
+import me.pingcai.exception.BizException;
+import me.pingcai.exception.SystemException;
 import me.pingcai.util.ListUtils;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -27,14 +28,20 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Throwable.class)
-    public Object throwable(Throwable throwable) {
-        log.error("系统内部异常: ", throwable);
+    public Object throwable(Exception e) {
+        log.error("系统内部异常, Exception: ", e);
         return HttpResponse.buildError(ReturnCode.INTERNAL_ERROR);
     }
 
-    @ExceptionHandler(value = ApiException.class)
-    public Object throwable(ApiException e) {
-        return HttpResponse.buildError(e.getError());
+    @ExceptionHandler(value = SystemException.class)
+    public Object systemException(SystemException e) {
+        log.error("系统内部异常, SystemException: ", e);
+        return HttpResponse.buildError(ReturnCode.INTERNAL_ERROR);
+    }
+
+    @ExceptionHandler(value = BizException.class)
+    public Object throwable(BizException e) {
+        return HttpResponse.buildError(e.getReturnCode());
     }
 
     @ExceptionHandler

@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
-public class UserVo {
+public class UserRegisterVo {
 
     private Long id;
 
