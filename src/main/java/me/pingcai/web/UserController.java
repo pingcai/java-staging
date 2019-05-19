@@ -6,8 +6,9 @@ import me.pingcai.domain.dto.HttpResponse;
 import me.pingcai.domain.dto.SimplePageInfo;
 import me.pingcai.domain.entity.User;
 import me.pingcai.domain.enums.UserStatus;
-import me.pingcai.domain.vo.UserLoginVo;
-import me.pingcai.domain.vo.UserRegisterVo;
+import me.pingcai.domain.vo.user.login.UserLoginReqVo;
+import me.pingcai.domain.vo.user.UserResVo;
+import me.pingcai.domain.vo.user.register.UserRegisterReqVo;
 import me.pingcai.enums.ReturnCode;
 import me.pingcai.service.DomainService;
 import me.pingcai.util.PasswordHash;
@@ -38,8 +39,8 @@ public class UserController {
     private DomainService domainService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Object create(@Validated @RequestBody UserRegisterVo userRegisterVo) {
-        User user = buildUser(userRegisterVo);
+    public Object create(@Validated @RequestBody UserRegisterReqVo userRegisterReqVo) {
+        User user = buildUser(userRegisterReqVo);
         Long id = domainService.insertUserIfNotExist(user);
         if (id > 0) {
             return HttpResponse.buildSuccess(Maps.immutableEntry("id", id));
@@ -47,20 +48,8 @@ public class UserController {
         return HttpResponse.buildError(ReturnCode.INTERNAL_ERROR);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public Object get(@PathVariable("id") Long id) {
-        return Optional.ofNullable(domainService.selectUserByPrimaryKey(id))
-                .map(user -> {
-                    UserRegisterVo res = new UserRegisterVo();
-                    BeanUtils.copyProperties(user, res);
-                    res.setPassword(null);
-                    return HttpResponse.buildSuccess(res);
-                })
-                .orElse(HttpResponse.buildError(ReturnCode.USER_NOT_EXIST));
-    }
-
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public Object login(@Validated @RequestBody UserLoginVo loginVo) {
+    public Object login(@Validated @RequestBody UserLoginReqVo loginVo) {
         User user = domainService.selectUserByName(loginVo.getName());
         if (user == null) {
             return HttpResponse.buildError(ReturnCode.NAME_PASSWORD_MISMATCH);
@@ -87,44 +76,55 @@ public class UserController {
         return domainService.selectUserByPage(pageInfo);
     }
 
-    private User buildUser(UserRegisterVo userRegisterVo) {
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public Object get(@PathVariable("id") Long id) {
+        return Optional.ofNullable(domainService.selectUserByPrimaryKey(id))
+                .map(user -> {
+                    UserResVo res = new UserResVo();
+                    BeanUtils.copyProperties(user, res);
+                    return HttpResponse.buildSuccess(res);
+                })
+                .orElse(HttpResponse.buildError(ReturnCode.USER_NOT_EXIST));
+    }
+
+    private User buildUser(UserRegisterReqVo userRegisterReqVo) {
         Date now = new Date();
         User user = new User();
 
         user.setStatus(UserStatus.NORMAL);
-        user.setName(userRegisterVo.getName());
-        user.setDisplayName(userRegisterVo.getDisplayName());
-        user.setProfilePicture(userRegisterVo.getProfilePicture() == null ? StringUtils.EMPTY : userRegisterVo.getProfilePicture());
-        user.setPhone(userRegisterVo.getPhone());
-        user.setEmail(userRegisterVo.getEmail());
+        user.setName(userRegisterReqVo.getName());
+        user.setDisplayName(userRegisterReqVo.getDisplayName());
+        user.setProfilePicture(userRegisterReqVo.getProfilePicture() == null ? StringUtils.EMPTY : userRegisterReqVo.getProfilePicture());
+        user.setPhone(userRegisterReqVo.getPhone());
+        user.setEmail(userRegisterReqVo.getEmail());
 
-        Pair<String, String> saltPassword = PasswordHash.createHash(userRegisterVo.getPassword());
+        Pair<String, String> saltPassword = PasswordHash.createHash(userRegisterReqVo.getPassword());
         user.setPasswordSalt(saltPassword.getKey());
         user.setPassword(saltPassword.getValue());
 
-        user.setSex(userRegisterVo.getSex());
-        user.setAge(userRegisterVo.getAge());
-        user.setBirthday(userRegisterVo.getBirthday());
+        user.setSex(userRegisterReqVo.getSex());
+        user.setAge(userRegisterReqVo.getAge());
+        user.setBirthday(userRegisterReqVo.getBirthday());
         user.setAddTime(now);
         user.setUpdateTime(now);
         return user;
     }
 
-    private UserLoginVo buildUserLoginVo(User user) {
-        UserLoginVo loginVo = new UserLoginVo();
-        loginVo.setStatus(user.getStatus());
-        loginVo.setName(user.getName());
-        loginVo.setDisplayName(user.getDisplayName());
-        loginVo.setProfilePicture(user.getProfilePicture() == null ? StringUtils.EMPTY : user.getProfilePicture());
-        loginVo.setPhone(user.getPhone());
-        loginVo.setEmail(user.getEmail());
-        loginVo.setPassword(null);
-        loginVo.setSex(user.getSex());
-        loginVo.setAge(user.getAge());
-        loginVo.setBirthday(user.getBirthday());
-        loginVo.setIntroduction(user.getIntroduction());
-        loginVo.setAddTime(user.getAddTime());
-        loginVo.setUpdateTime(user.getUpdateTime());
-        return loginVo;
+    private UserResVo buildUserLoginVo(User user) {
+        UserResVo loginResVo = new UserResVo();
+        loginResVo.setId(user.getId());
+        loginResVo.setStatus(user.getStatus());
+        loginResVo.setName(user.getName());
+        loginResVo.setDisplayName(user.getDisplayName());
+        loginResVo.setProfilePicture(user.getProfilePicture() == null ? StringUtils.EMPTY : user.getProfilePicture());
+        loginResVo.setPhone(user.getPhone());
+        loginResVo.setEmail(user.getEmail());
+        loginResVo.setSex(user.getSex());
+        loginResVo.setAge(user.getAge());
+        loginResVo.setBirthday(user.getBirthday());
+        loginResVo.setIntroduction(user.getIntroduction());
+        loginResVo.setAddTime(user.getAddTime());
+        loginResVo.setUpdateTime(user.getUpdateTime());
+        return loginResVo;
     }
 }

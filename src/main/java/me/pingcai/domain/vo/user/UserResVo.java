@@ -1,12 +1,9 @@
-package me.pingcai.domain.vo;
+package me.pingcai.domain.vo.user;
 
 import lombok.Data;
 import me.pingcai.domain.enums.UserSex;
 import me.pingcai.domain.enums.UserStatus;
-import me.pingcai.util.DateUtils;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 /**
@@ -14,13 +11,12 @@ import java.util.Date;
  * @since 2019-05-19 17:50
  */
 @Data
-public class UserLoginVo {
+public class UserResVo {
 
     private Long id;
 
     private UserStatus status;
 
-    @NotEmpty(message = "用户名不能为空")
     private String name;
 
     private String displayName;
@@ -30,9 +26,6 @@ public class UserLoginVo {
     private String phone;
 
     private String email;
-
-    @NotEmpty(message = "密码不能为空")
-    private String password;
 
     private UserSex sex;
 

@@ -1,8 +1,7 @@
-package me.pingcai.domain.vo;
+package me.pingcai.domain.vo.user.register;
 
 import lombok.Data;
 import me.pingcai.domain.enums.UserSex;
-import me.pingcai.domain.enums.UserStatus;
 import me.pingcai.web.validator.NameCheck;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -14,11 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
-public class UserRegisterVo {
-
-    private Long id;
-
-    private UserStatus status;
+public class UserRegisterReqVo {
 
     @NameCheck(min = 3, max = 16, message = "用户名不合法", regex = "^[0-9a-zA-Z_]{3,}$")
     private String name;
@@ -52,7 +47,5 @@ public class UserRegisterVo {
 
     @NotEmpty(message = "自我介绍不能为空")
     private String introduction;
-
-    private Date addTime;
 
 }
