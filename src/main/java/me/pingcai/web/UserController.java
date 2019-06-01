@@ -39,7 +39,7 @@ public class UserController {
     private DomainService domainService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Object create(@Validated @RequestBody UserRegisterReqVo userRegisterReqVo) {
+    public Object register(@Validated @RequestBody UserRegisterReqVo userRegisterReqVo) {
         User user = buildUser(userRegisterReqVo);
         Long id = domainService.insertUserIfNotExist(user);
         if (id > 0) {

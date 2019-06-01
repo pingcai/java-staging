@@ -38,12 +38,17 @@ public class UserRepositoryTests {
                 try {
                     for (int j = 0; j < 60000; j++) {
                         User user = new User();
+                        user.setStatus(random.nextBoolean() ? UserStatus.NORMAL:UserStatus.DELETED);
                         user.setName(StringUtils.substring(UUID.randomUUID().toString(), 0, 31));
+                        user.setDisplayName("钢铁侠");
+                        user.setPhone("1312515123");
+                        user.setEmail("hpingcai@gmail.com");
+                        user.setPassword("123");
+                        user.setSex(random.nextBoolean() ? UserSex.MALE : UserSex.FEMALE);
                         user.setAge(j % 127);
                         user.setBirthday(new Date());
-                        user.setSex(random.nextBoolean() ? UserSex.MALE : UserSex.FEMALE);
-                        user.setStatus(random.nextBoolean() ? UserStatus.NORMAL : UserStatus.NONACTIVATED);
                         user.setIntroduction(String.valueOf(j));
+                        user.setIntroduction("个人简介");
                         Date now  = new Date();
                         user.setAddTime(now);
                         user.setUpdateTime(now);

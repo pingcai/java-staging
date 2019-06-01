@@ -1,4 +1,4 @@
-package me.pingcai.powermock;
+package me.pingcai.mock;
 
 import me.pingcai.util.JsonUtils;
 import org.junit.Assert;
