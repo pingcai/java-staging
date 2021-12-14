@@ -27,7 +27,7 @@
         <connector-java.version>5.1.36</connector-java.version>
 
         <slf4j.version>1.7.25</slf4j.version>
-        <log4j.version>2.9.1</log4j.version>
+        <log4j.version>2.16.0</log4j.version>
 
         <lombok.version>1.16.18</lombok.version>
         <guava.version>23.0</guava.version>
